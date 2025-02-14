@@ -6,13 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Grasspop 2025 Bands Rater - By Edwin de Jong</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      fetch("/bands.json")
-        .then((response) => response.json())
-        .then((data) => {
-          window.bandsData = data;
-        });
-    </script>
   </head>
   <body>
     <div id="root"></div>
