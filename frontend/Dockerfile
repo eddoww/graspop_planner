@@ -12,6 +12,12 @@ RUN npm install
 # Copy the rest of the application
 COPY . .
 
+# Use build-time argument for API URL
+ARG VITE_API_URL=https://grasspopapi.edwindejong.net
+
+# Set the environment variable during build
+ENV VITE_API_URL=$VITE_API_URL
+
 # Build the application
 RUN npm run build
 
