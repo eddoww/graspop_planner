@@ -57,7 +57,7 @@ cd graspop-planner
 
 ### Accessing the Application
 
-- **Frontend**: `http://localhost`
+- **Frontend**: `http://localhost:3020`
 - **Backend API**: `http://localhost:3001`
 
 ## Development
