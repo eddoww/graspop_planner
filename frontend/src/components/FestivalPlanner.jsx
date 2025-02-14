@@ -15,12 +15,16 @@ const FestivalPlanner = () => {
     const fetchData = async () => {
       try {
         // Fetch all bands
-        const bandsResponse = await fetch(`${API_URL}/bands/`);
+        const bandsResponse = await fetch(
+          `${import.meta.env.VITE_API_URL}/bands/`
+        );
         const bandsData = await bandsResponse.json();
         setBands(bandsData);
 
         // Fetch all users
-        const usersResponse = await fetch(`${API_URL}/users/`);
+        const usersResponse = await fetch(
+          `${import.meta.env.VITE_API_URL}/users/`
+        );
         const usersData = await usersResponse.json();
         setUsers(usersData);
 
@@ -28,7 +32,7 @@ const FestivalPlanner = () => {
         const allUserRatings = {};
         for (const user of usersData) {
           const ratingsResponse = await fetch(
-            `${API_URL}/users/${user.id}/ratings/`
+            `${import.meta.env.VITE_API_URL}/users/${user.id}/ratings/`
           );
           const ratingsData = await ratingsResponse.json();
           allUserRatings[user.id] = ratingsData.reduce((acc, rating) => {

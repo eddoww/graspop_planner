@@ -27,14 +27,14 @@ const GraspopPlanner = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await fetch(`${API_URL}/bands/`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/bands/`);
         const data = await response.json();
         setBands(data);
 
         // If we have a current user, load their ratings
         if (currentUser) {
           const ratingsResponse = await fetch(
-            `${API_URL}/users/${currentUser.id}/ratings/`
+            `${import.meta.env.VITE_API_URL}/users/${currentUser.id}/ratings/`
           );
           const ratingsData = await ratingsResponse.json();
 
@@ -67,7 +67,9 @@ const GraspopPlanner = () => {
       if (existingRating) {
         // Update existing rating
         response = await fetch(
-          `${API_URL}/users/${currentUser.id}/ratings/${bandId}`,
+          `${import.meta.env.VITE_API_URL}/users/${
+            currentUser.id
+          }/ratings/${bandId}`,
           {
             method: "PUT",
             headers: {
@@ -78,16 +80,19 @@ const GraspopPlanner = () => {
         );
       } else {
         // Create new rating
-        response = await fetch(`${API_URL}/users/${currentUser.id}/ratings/`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            band_id: bandId,
-            ...updates,
-          }),
-        });
+        response = await fetch(
+          `${import.meta.env.VITE_API_URL}/users/${currentUser.id}/ratings/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              band_id: bandId,
+              ...updates,
+            }),
+          }
+        );
       }
 
       if (!response.ok) {
