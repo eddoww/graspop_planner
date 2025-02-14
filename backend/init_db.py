@@ -6,7 +6,7 @@ import json
 import os
 
 # Database connection
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://graspop:graspoppass@localhost/graspop")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://graspop:graspoppass@db/graspop")
 engine = create_engine(DATABASE_URL)
 
 # Create tables
