@@ -50,13 +50,7 @@ cd graspop-planner
 
 ### Environment Setup
 
-1. Create a `.env` file in the project root with the following variables:
-
-   ```
-   DATABASE_URL=postgresql://username:password@postgres:5432/graspopdb
-   ```
-
-2. Build and start the application:
+1. Build and start the application:
    ```bash
    docker-compose up --build
    ```
@@ -113,7 +107,7 @@ This application is primarily for private use among friends. It is shared openly
 
 ## Contact
 
-Your Name - info@edwindejong.net
+Edwin de Jong - info@edwindejong.net
 
 Project Link: [https://github.com/eddoww/graspop-planner](https://github.com/eddoww/graspop-planner)
 

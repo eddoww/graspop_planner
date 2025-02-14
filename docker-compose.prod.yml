@@ -25,6 +25,8 @@ services:
     image: ghcr.io/eddoww/graspop_planner/frontend:latest
     depends_on:
       - backend
+    environment:
+      VITE_API_URL: http://backend:3001
     restart: unless-stopped
     expose:
       - "80"

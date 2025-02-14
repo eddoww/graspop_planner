@@ -20,7 +20,7 @@ export const UserProvider = ({ children }) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://localhost:3001/users/");
+      const response = await fetch(`${API_URL}/users/`);
       const data = await response.json();
       setUsers(data);
     } catch (error) {
@@ -37,7 +37,7 @@ export const UserProvider = ({ children }) => {
 
   const createUser = async (name) => {
     try {
-      const response = await fetch("http://localhost:3001/users/", {
+      const response = await fetch(`${API_URL}/users/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
