@@ -1,0 +1,2194 @@
+[
+  {
+    "name": "Airbourne",
+    "day": "Saturday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hard Rock", "Heavy Metal"],
+    "origin": "Warrnambool, Australia",
+    "formed": 2003,
+    "facts": [
+      "Often compared to AC/DC due to their similar high-energy rock style",
+      "Known for their explosive live performances and stage stunts"
+    ],
+    "suggestedSongs": ["Runnin' Wild", "Live It Up", "Back in the Game"]
+  },
+  {
+    "name": "Alcest",
+    "day": "Sunday",
+    "stage": "Metal Dome",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Blackgaze", "Post-Metal", "Shoegaze"],
+    "origin": "Bagnols-sur-Cèze, France",
+    "formed": 2000,
+    "facts": [
+      "Pioneers of the blackgaze genre, combining black metal with shoegaze",
+      "Started as a black metal project but evolved into a more atmospheric sound"
+    ],
+    "suggestedSongs": ["Sapphire", "Protection", "Kodama"]
+  },
+  {
+    "name": "Alestorm",
+    "day": "Thursday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Folk Metal", "Power Metal", "Pirate Metal"],
+    "origin": "Perth, Scotland",
+    "formed": 2004,
+    "facts": [
+      "Known for their pirate-themed lyrics and imagery",
+      "Originally named Battleheart before changing to Alestorm"
+    ],
+    "suggestedSongs": ["Drink", "Captain Morgan's Revenge", "Keelhauled"]
+  },
+  {
+    "name": "Alien Ant Farm",
+    "day": "Thursday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Nu Metal", "Alternative Rock"],
+    "origin": "Riverside, California, USA",
+    "formed": 1996,
+    "facts": [
+      "Gained worldwide fame with their cover of Michael Jackson's \"Smooth Criminal\"",
+      "Their band name came from an idea about aliens terraforming Earth"
+    ],
+    "suggestedSongs": ["Smooth Criminal", "Movies", "These Days"]
+  },
+  {
+    "name": "Amenra",
+    "day": "Saturday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Post-Metal", "Sludge Metal", "Doom Metal"],
+    "origin": "Kortrijk, Belgium",
+    "formed": 1999,
+    "facts": [
+      "Known for their intense, spiritual live performances",
+      "Part of the Church of Ra collective"
+    ],
+    "suggestedSongs": ["A Solitary Reign", "Plus Près de Toi", "Razoreater"]
+  },
+  {
+    "name": "Amira Elfeky",
+    "day": "Sunday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Metal", "Rock"],
+    "origin": "Egypt",
+    "formed": 2020,
+    "facts": [
+      "Rising star in the Middle Eastern metal scene",
+      "Known for combining traditional Middle Eastern elements with modern metal"
+    ],
+    "suggestedSongs": []
+  },
+  {
+    "name": "Angelus Apatrida",
+    "day": "Sunday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Thrash Metal"],
+    "origin": "Albacete, Spain",
+    "formed": 2000,
+    "facts": [
+      "One of Spain's leading thrash metal bands",
+      "Their name means \"Stateless Angel\" in Latin"
+    ],
+    "suggestedSongs": ["Bleed the Crown", "Eternal Life", "Empire of Shame"]
+  },
+  {
+    "name": "Apocalyptica",
+    "day": "Saturday",
+    "stage": "Metal Dome",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Symphonic Metal", "Cello Metal", "Alternative Metal"],
+    "origin": "Helsinki, Finland",
+    "formed": 1993,
+    "facts": [
+      "Started as a Metallica classical tribute band",
+      "Known for performing metal music with cellos"
+    ],
+    "suggestedSongs": ["Nothing Else Matters", "Path", "I Don't Care"]
+  },
+  {
+    "name": "As Everything Unfolds",
+    "day": "Friday",
+    "stage": "Metal Dome",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Post-Hardcore", "Alternative Metal"],
+    "origin": "High Wycombe, UK",
+    "formed": 2014,
+    "facts": [
+      "Known for their dynamic female-fronted vocals",
+      "Gained prominence in the UK post-hardcore scene"
+    ],
+    "suggestedSongs": [
+      "On the Inside",
+      "Stranger in the Mirror",
+      "Take Me There"
+    ]
+  },
+  {
+    "name": "Bad Wolves",
+    "day": "Saturday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Hard Rock"],
+    "origin": "Los Angeles, California, USA",
+    "formed": 2017,
+    "facts": [
+      "Gained fame with their cover of The Cranberries' \"Zombie\"",
+      "Features former members of DevilDriver and God Forbid"
+    ],
+    "suggestedSongs": ["Zombie", "Remember When", "Killing Me Slowly"]
+  },
+  {
+    "name": "Beast In Black",
+    "day": "Thursday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Power Metal", "Heavy Metal"],
+    "origin": "Helsinki, Finland",
+    "formed": 2015,
+    "facts": [
+      "Founded by former Battle Beast guitarist Anton Kabanen",
+      "Known for their anime and manga-inspired lyrics"
+    ],
+    "suggestedSongs": [
+      "Blind and Frozen",
+      "Sweet True Lies",
+      "From Hell with Love"
+    ]
+  },
+  {
+    "name": "Beyond The Black",
+    "day": "Sunday",
+    "stage": "Metal Dome",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Symphonic Metal", "Power Metal"],
+    "origin": "Mannheim, Germany",
+    "formed": 2014,
+    "facts": [
+      "Led by vocalist Jennifer Haben",
+      "All their studio albums have charted in the German top 10"
+    ],
+    "suggestedSongs": ["Heart of the Hurricane", "Lost in Forever", "Misery"]
+  },
+  {
+    "name": "Blood Incantation",
+    "day": "Friday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Death Metal", "Progressive Death Metal"],
+    "origin": "Denver, Colorado, USA",
+    "formed": 2011,
+    "facts": [
+      "Known for their cosmic and science fiction themes",
+      "Blend technical death metal with psychedelic elements"
+    ],
+    "suggestedSongs": [
+      "Slave Species of the Gods",
+      "Inner Paths (to Outer Space)",
+      "Awakening..."
+    ]
+  },
+  {
+    "name": "British Lion",
+    "day": "Friday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hard Rock", "Heavy Metal"],
+    "origin": "England, UK",
+    "formed": 2012,
+    "facts": [
+      "Side project of Iron Maiden bassist Steve Harris",
+      "Focuses on a more classic rock sound compared to Maiden"
+    ],
+    "suggestedSongs": ["These Are the Rules", "Lightning", "The Burning"]
+  },
+  {
+    "name": "Carcass",
+    "day": "Thursday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Death Metal", "Melodic Death Metal", "Grindcore"],
+    "origin": "Liverpool, England",
+    "formed": 1985,
+    "facts": [
+      "Pioneers of goregrind and melodic death metal",
+      "Known for their medical terminology-themed lyrics"
+    ],
+    "suggestedSongs": [
+      "Heartwork",
+      "Corporal Jigsore Quandary",
+      "Keep on Rotting in the Free World"
+    ]
+  },
+  {
+    "name": "Cattle Decapitation",
+    "day": "Saturday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Death Metal", "Deathgrind"],
+    "origin": "San Diego, California, USA",
+    "formed": 1996,
+    "facts": [
+      "Known for their environmental and anti-human themes",
+      "All members are vegetarians or vegans"
+    ],
+    "suggestedSongs": [
+      "The Carbon Stampede",
+      "Forced Gender Reassignment",
+      "Kingdom of Tyrants"
+    ]
+  },
+  {
+    "name": "Charlotte Wessels",
+    "day": "Thursday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Symphonic Metal", "Gothic Metal", "Art Rock"],
+    "origin": "Netherlands",
+    "formed": 2021,
+    "facts": [
+      "Former lead vocalist of Delain",
+      "Known for her diverse vocal styles and poetic lyrics"
+    ],
+    "suggestedSongs": ["Soft Revolution", "Victor", "New Mythology"]
+  },
+  {
+    "name": "Creeper",
+    "day": "Sunday",
+    "stage": "Metal Dome",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Gothic Rock", "Punk Rock", "Horror Punk"],
+    "origin": "Southampton, England",
+    "formed": 2014,
+    "facts": [
+      "Known for their theatrical performances and concept albums",
+      "Influenced by AFI and Misfits"
+    ],
+    "suggestedSongs": ["Annabelle", "Black Mass", "Hiding With Boys"]
+  },
+  {
+    "name": "Crossfaith",
+    "day": "Sunday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Electronic Metalcore", "Industrial Metal"],
+    "origin": "Osaka, Japan",
+    "formed": 2006,
+    "facts": [
+      "Pioneers in combining electronic music with metalcore",
+      "Known for their energetic live performances"
+    ],
+    "suggestedSongs": ["Monolith", "Catastrophe", "Freedom"]
+  },
+  {
+    "name": "Currents",
+    "day": "Sunday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Metalcore", "Progressive Metal"],
+    "origin": "Connecticut, USA",
+    "formed": 2011,
+    "facts": [
+      "Known for their technical approach to metalcore",
+      "Blend of aggressive metalcore with atmospheric elements"
+    ],
+    "suggestedSongs": ["The Death We Seek", "Monsters", "Better Days"]
+  },
+  {
+    "name": "Dayseeker",
+    "day": "Sunday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Post-Hardcore"],
+    "origin": "Orange County, California, USA",
+    "formed": 2012,
+    "facts": [
+      "Known for their emotional lyrics and atmospheric sound",
+      "Gained widespread recognition with their album \"Dark Sun\""
+    ],
+    "suggestedSongs": ["Sleeptalk", "Burial Plot", "Drunk"]
+  },
+  {
+    "name": "Dead Poet Society",
+    "day": "Friday",
+    "stage": "South Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Progressive Rock"],
+    "origin": "Boston, Massachusetts, USA",
+    "formed": 2013,
+    "facts": [
+      "Named after the 1989 film of the same name",
+      "Known for their unique guitar techniques and tunings"
+    ],
+    "suggestedSongs": [".CoDA.", "Lo Air", "Been Here Before"]
+  },
+  {
+    "name": "Deafheaven",
+    "day": "Thursday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Blackgaze", "Post-Metal", "Black Metal"],
+    "origin": "San Francisco, California, USA",
+    "formed": 2010,
+    "facts": [
+      "Pioneers in combining black metal with shoegaze",
+      "Known for their genre-defying approach to metal"
+    ],
+    "suggestedSongs": ["Dream House", "Honeycomb", "Great Mass of Color"]
+  },
+  {
+    "name": "Death Angel",
+    "day": "Thursday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Thrash Metal"],
+    "origin": "San Francisco, California, USA",
+    "formed": 1982,
+    "facts": [
+      "One of the earliest thrash metal bands from the Bay Area scene",
+      "Known for their technical and aggressive style"
+    ],
+    "suggestedSongs": [
+      "Thrown to the Wolves",
+      "Humanicide",
+      "The Ultra-Violence"
+    ]
+  },
+  {
+    "name": "Dethklok",
+    "day": "Friday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Melodic Death Metal", "Heavy Metal"],
+    "origin": "Virtual Band (USA)",
+    "formed": 2006,
+    "facts": [
+      "Virtual band from the animated series Metalocalypse",
+      "Created by Brendon Small and Tommy Blacha"
+    ],
+    "suggestedSongs": ["Awaken", "Thunderhorse", "Face Fisted"]
+  },
+  {
+    "name": "DragonForce",
+    "day": "Saturday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Power Metal", "Speed Metal"],
+    "origin": "London, England",
+    "formed": 1999,
+    "facts": [
+      "Known for their extremely fast guitar solos and fantasy themes",
+      "Gained widespread fame through Guitar Hero III"
+    ],
+    "suggestedSongs": [
+      "Through the Fire and Flames",
+      "Valley of the Damned",
+      "Heroes of Our Time"
+    ]
+  },
+  {
+    "name": "Dream Theater",
+    "day": "Thursday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Progressive Metal", "Progressive Rock"],
+    "origin": "Boston, Massachusetts, USA",
+    "formed": 1985,
+    "facts": [
+      "Known for their technical proficiency and complex compositions",
+      "Pioneers of progressive metal"
+    ],
+    "suggestedSongs": [
+      "Pull Me Under",
+      "The Spirit Carries On",
+      "Metropolis Pt. 1"
+    ]
+  },
+  {
+    "name": "Dødheimsgard",
+    "day": "Saturday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Avant-garde Black Metal", "Industrial Metal"],
+    "origin": "Oslo, Norway",
+    "formed": 1994,
+    "facts": [
+      "Known for their experimental approach to black metal",
+      "Evolved from traditional black metal to a more avant-garde style"
+    ],
+    "suggestedSongs": [
+      "Kronet til Konge",
+      "Vendetta Assassin",
+      "The Paramount Empire"
+    ]
+  },
+  {
+    "name": "Eagles Of Death Metal",
+    "day": "Friday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Rock", "Garage Rock", "Blues Rock"],
+    "origin": "Palm Desert, California, USA",
+    "formed": 1998,
+    "facts": [
+      "Founded by Jesse Hughes and Josh Homme",
+      "Despite their name, they are not a death metal band"
+    ],
+    "suggestedSongs": [
+      "I Want You So Hard",
+      "Miss Alissa",
+      "Speaking in Tongues"
+    ]
+  },
+  {
+    "name": "Eisbrecher",
+    "day": "Saturday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Neue Deutsche Härte", "Industrial Metal"],
+    "origin": "Munich, Germany",
+    "formed": 2003,
+    "facts": [
+      "Name means \"Icebreaker\" in German",
+      "Founded by former Megaherz vocalist Alexander Wesselsky"
+    ],
+    "suggestedSongs": ["Was ist hier los?", "Verrückt", "This Is Deutsch"]
+  },
+  {
+    "name": "Employed to Serve",
+    "day": "Friday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Metalcore", "Hardcore Punk"],
+    "origin": "Woking, England",
+    "formed": 2012,
+    "facts": [
+      "Known for their aggressive sound and intense live shows",
+      "Led by vocalist Justine Jones"
+    ],
+    "suggestedSongs": ["Eternal Forward Motion", "Force Fed", "Party's Over"]
+  },
+  {
+    "name": "Epica",
+    "day": "Thursday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Symphonic Metal", "Gothic Metal"],
+    "origin": "Reuver, Netherlands",
+    "formed": 2002,
+    "facts": [
+      "Known for combining classical music with metal",
+      "Lyrics often deal with philosophical and scientific themes"
+    ],
+    "suggestedSongs": [
+      "Cry for the Moon",
+      "Design Your Universe",
+      "Storm the Sorrow"
+    ]
+  },
+  {
+    "name": "Falling In Reverse",
+    "day": "Friday",
+    "stage": "South Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Post-Hardcore", "Alternative Metal", "Pop Punk"],
+    "origin": "Las Vegas, Nevada, USA",
+    "formed": 2008,
+    "facts": [
+      "Founded by former Escape the Fate vocalist Ronnie Radke",
+      "Known for mixing various genres including rap and electronic music"
+    ],
+    "suggestedSongs": [
+      "Popular Monster",
+      "The Drug In Me Is You",
+      "Watch the World Burn"
+    ]
+  },
+  {
+    "name": "Fit For An Autopsy",
+    "day": "Sunday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Deathcore", "Progressive Metal"],
+    "origin": "Jersey City, New Jersey, USA",
+    "formed": 2008,
+    "facts": [
+      "Known for their progressive approach to deathcore",
+      "Producer Will Putney is a guitarist in the band"
+    ],
+    "suggestedSongs": [
+      "The Sea of Tragic Beasts",
+      "Black Mammoth",
+      "Heads Will Hang"
+    ]
+  },
+  {
+    "name": "Fleshwater",
+    "day": "Thursday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Shoegaze"],
+    "origin": "Boston, Massachusetts, USA",
+    "formed": 2020,
+    "facts": [
+      "Features members of Vein.fm",
+      "Blend heavy music with shoegaze elements"
+    ],
+    "suggestedSongs": ["Kiss the Ladder", "The Razor's Apple", "Linda Claire"]
+  },
+  {
+    "name": "Flogging Molly",
+    "day": "Thursday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Celtic Punk", "Folk Punk"],
+    "origin": "Los Angeles, California, USA",
+    "formed": 1997,
+    "facts": [
+      "Known for blending traditional Irish music with punk rock",
+      "Named after Molly Malone's, the bar where they started performing"
+    ],
+    "suggestedSongs": [
+      "Drunken Lullabies",
+      "Devils Dance Floor",
+      "Seven Deadly Sins"
+    ]
+  },
+  {
+    "name": "Gloryhammer",
+    "day": "Friday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Power Metal", "Symphonic Metal"],
+    "origin": "Dundee, Scotland",
+    "formed": 2010,
+    "facts": [
+      "Created by Alestorm's Christopher Bowes",
+      "Known for their fantasy-themed concept albums"
+    ],
+    "suggestedSongs": ["Angus McFife", "Universe on Fire", "Gloryhammer"]
+  },
+  {
+    "name": "Green Lung",
+    "day": "Friday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Stoner Metal", "Doom Metal", "Psychedelic Rock"],
+    "origin": "London, England",
+    "formed": 2017,
+    "facts": [
+      "Known for their occult-themed lyrics and folk horror influences",
+      "Blend 70s hard rock with modern heavy metal"
+    ],
+    "suggestedSongs": [
+      "Woodland Rites",
+      "Leaders of the Blind",
+      "Let the Devil In"
+    ]
+  },
+  {
+    "name": "Halocene",
+    "day": "Sunday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Rock", "Pop Rock"],
+    "origin": "Phoenix, Arizona, USA",
+    "formed": 2008,
+    "facts": [
+      "Gained popularity through YouTube covers",
+      "Known for their fan interaction and social media presence"
+    ],
+    "suggestedSongs": ["Villain", "Monster", "Dark Paradise"]
+  },
+  {
+    "name": "Hardy",
+    "day": "Sunday",
+    "stage": "South Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Country Rock", "Alternative Metal"],
+    "origin": "Philadelphia, Mississippi, USA",
+    "formed": 2018,
+    "facts": [
+      "Started as a country songwriter before pursuing rock",
+      "Known for blending country and hard rock styles"
+    ],
+    "suggestedSongs": ["SOLD OUT", "JACK", "TRUCK BED"]
+  },
+  {
+    "name": "Hatebreed",
+    "day": "Thursday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Metalcore", "Hardcore Punk"],
+    "origin": "New Haven, Connecticut, USA",
+    "formed": 1994,
+    "facts": [
+      "Known for their positive message and motivational lyrics",
+      "One of the pioneers of metalcore"
+    ],
+    "suggestedSongs": [
+      "I Will Be Heard",
+      "Looking Down the Barrel of Today",
+      "Live for This"
+    ]
+  },
+  {
+    "name": "Heaven Shall Burn",
+    "day": "Sunday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Melodic Death Metal", "Metalcore"],
+    "origin": "Saalfeld, Germany",
+    "formed": 1996,
+    "facts": [
+      "Known for their political and social commentary",
+      "Band name comes from a Marduk album"
+    ],
+    "suggestedSongs": ["Endzeit", "Hunters Will Be Hunted", "Combat"]
+  },
+  {
+    "name": "Hot Milk",
+    "day": "Thursday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Pop Punk", "Alternative Rock"],
+    "origin": "Manchester, England",
+    "formed": 2018,
+    "facts": [
+      "Known for their dual vocalist approach",
+      "Rapidly rising stars in the modern pop-punk scene"
+    ],
+    "suggestedSongs": [
+      "Wide Awake",
+      "I JUST WANNA KNOW WHAT HAPPENS WHEN I'M DEAD",
+      "Glass Spiders"
+    ]
+  },
+  {
+    "name": "House Of Protection",
+    "day": "Friday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hardcore", "Metalcore"],
+    "origin": "Belgium",
+    "formed": 2020,
+    "facts": [
+      "Rising stars in the Belgian hardcore scene",
+      "Known for their intense live performances"
+    ],
+    "suggestedSongs": ["Omen"]
+  },
+  {
+    "name": "Imminence",
+    "day": "Saturday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Metalcore", "Alternative Metal"],
+    "origin": "Trelleborg, Sweden",
+    "formed": 2010,
+    "facts": [
+      "Known for incorporating violin into their metalcore sound",
+      "Lead singer Eddie Berg also plays violin"
+    ],
+    "suggestedSongs": ["Temptation", "Heaven in Hiding", "Ghost"]
+  },
+  {
+    "name": "In Flames",
+    "day": "Sunday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Melodic Death Metal", "Alternative Metal"],
+    "origin": "Gothenburg, Sweden",
+    "formed": 1990,
+    "facts": [
+      "Pioneers of the Gothenburg melodic death metal sound",
+      "Evolved from melodic death metal to a more alternative metal style"
+    ],
+    "suggestedSongs": ["Cloud Connected", "Take This Life", "The Quiet Place"]
+  },
+  {
+    "name": "Iron Maiden",
+    "day": "Thursday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Heavy Metal", "NWOBHM"],
+    "origin": "London, England",
+    "formed": 1975,
+    "facts": [
+      "One of the most successful and influential heavy metal bands of all time",
+      "Known for their mascot Eddie and elaborate stage shows"
+    ],
+    "suggestedSongs": ["The Trooper", "Fear of the Dark", "Run to the Hills"]
+  },
+  {
+    "name": "Jerry Cantrell",
+    "day": "Friday",
+    "stage": "North Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Grunge", "Heavy Metal"],
+    "origin": "Tacoma, Washington, USA",
+    "formed": 1984,
+    "facts": [
+      "Lead guitarist and co-vocalist of Alice In Chains",
+      "Known for his distinctive guitar tone and harmonized vocals"
+    ],
+    "suggestedSongs": ["Atone", "Brighten", "Had To Know"]
+  },
+  {
+    "name": "Jinjer",
+    "day": "Friday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Progressive Metal", "Metalcore", "Djent"],
+    "origin": "Donetsk, Ukraine",
+    "formed": 2009,
+    "facts": [
+      "Known for vocalist Tatiana Shmayluk's diverse vocal range",
+      "Blend technical metal with progressive elements"
+    ],
+    "suggestedSongs": [
+      "Pisces",
+      "Teacher, Teacher!",
+      "Judgement (& Punishment)"
+    ]
+  },
+  {
+    "name": "Judas Priest",
+    "day": "Sunday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Heavy Metal", "Speed Metal"],
+    "origin": "Birmingham, England",
+    "formed": 1969,
+    "facts": [
+      "One of the defining bands of heavy metal",
+      "Known for their twin lead guitar sound and Rob Halford's powerful vocals"
+    ],
+    "suggestedSongs": [
+      "Breaking the Law",
+      "Painkiller",
+      "You've Got Another Thing Comin'"
+    ]
+  },
+  {
+    "name": "Julie Christmas",
+    "day": "Thursday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Post-Metal", "Alternative Metal"],
+    "origin": "Brooklyn, New York, USA",
+    "formed": 2006,
+    "facts": [
+      "Former vocalist of Made Out of Babies and Battle of Mice",
+      "Known for her unique and dynamic vocal style"
+    ],
+    "suggestedSongs": ["July 31st", "If You Go Away", "Bow"]
+  },
+  {
+    "name": "Katatonia",
+    "day": "Sunday",
+    "stage": "Metal Dome",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Progressive Metal", "Gothic Metal", "Doom Metal"],
+    "origin": "Stockholm, Sweden",
+    "formed": 1991,
+    "facts": [
+      "Evolved from death/doom to progressive metal",
+      "Known for their melancholic sound and atmospheric approach"
+    ],
+    "suggestedSongs": ["My Twin", "July", "The Winter of Our Passing"]
+  },
+  {
+    "name": "Kim Dracula",
+    "day": "Friday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Nu Metal", "Trap Metal"],
+    "origin": "Internet",
+    "formed": 2020,
+    "facts": [
+      "Rose to fame through TikTok",
+      "Known for mixing various genres including metal and rap"
+    ],
+    "suggestedSongs": ["Paparazzi", "Make Me Famous", "Anti-Everything"]
+  },
+  {
+    "name": "King Diamond",
+    "day": "Sunday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Heavy Metal", "Power Metal"],
+    "origin": "Copenhagen, Denmark",
+    "formed": 1985,
+    "facts": [
+      "Known for his extensive vocal range and theatrical performances",
+      "Creates concept albums with horror-themed storylines"
+    ],
+    "suggestedSongs": ["Welcome Home", "Halloween", "The Family Ghost"]
+  },
+  {
+    "name": "Kittie",
+    "day": "Saturday",
+    "stage": "North Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Nu Metal", "Alternative Metal"],
+    "origin": "London, Ontario, Canada",
+    "formed": 1996,
+    "facts": [
+      "One of the first all-female metal bands to achieve mainstream success",
+      "Known for their aggressive sound and powerful vocals"
+    ],
+    "suggestedSongs": ["Brackish", "Charlotte", "What I Always Wanted"]
+  },
+  {
+    "name": "Knocked Loose",
+    "day": "Friday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Metalcore", "Hardcore Punk"],
+    "origin": "Oldham County, Kentucky, USA",
+    "formed": 2013,
+    "facts": [
+      "Known for their intense live shows and breakdowns",
+      "Blend of hardcore punk with extreme metal elements"
+    ],
+    "suggestedSongs": ["Counting Worms", "Billy No Mates", "God Knows"]
+  },
+  {
+    "name": "Korn",
+    "day": "Saturday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Nu Metal", "Alternative Metal"],
+    "origin": "Bakersfield, California, USA",
+    "formed": 1993,
+    "facts": [
+      "Pioneers of the nu metal genre",
+      "Known for their distinctive sound and Jonathan Davis's vocal style"
+    ],
+    "suggestedSongs": ["Freak on a Leash", "Coming Undone", "Got the Life"]
+  },
+  {
+    "name": "Krokus",
+    "day": "Sunday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hard Rock", "Heavy Metal"],
+    "origin": "Solothurn, Switzerland",
+    "formed": 1975,
+    "facts": [
+      "One of Switzerland's most successful rock bands",
+      "Often compared to AC/DC due to similar vocal style"
+    ],
+    "suggestedSongs": [
+      "Screaming in the Night",
+      "Midnight Maniac",
+      "Heatstrokes"
+    ]
+  },
+  {
+    "name": "Lagwagon",
+    "day": "Thursday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Punk Rock", "Melodic Hardcore"],
+    "origin": "Santa Barbara, California, USA",
+    "formed": 1990,
+    "facts": [
+      "One of the defining bands of 90s punk rock",
+      "Known for their technical proficiency and melodic approach"
+    ],
+    "suggestedSongs": ["May 16", "Alien 8", "Making Friends"]
+  },
+  {
+    "name": "Landmvrks",
+    "day": "Thursday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Metalcore", "Post-Hardcore"],
+    "origin": "Marseille, France",
+    "formed": 2014,
+    "facts": [
+      "Known for mixing heavy riffs with melodic elements",
+      "Gained popularity through social media and streaming platforms"
+    ],
+    "suggestedSongs": ["Lost in a Wave", "Rainfall", "Fantasy"]
+  },
+  {
+    "name": "Last Train",
+    "day": "Saturday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Rock", "Post-Rock"],
+    "origin": "Mulhouse, France",
+    "formed": 2007,
+    "facts": [
+      "One of France's most prominent rock bands",
+      "Known for their atmospheric sound and intense live performances"
+    ],
+    "suggestedSongs": ["The Big Picture", "Fragile", "Fire"]
+  },
+  {
+    "name": "Lorna Shore",
+    "day": "Saturday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Deathcore", "Symphonic Metal"],
+    "origin": "New Jersey, USA",
+    "formed": 2010,
+    "facts": [
+      "Known for their symphonic approach to deathcore",
+      "Gained massive popularity with vocalist Will Ramos"
+    ],
+    "suggestedSongs": ["To the Hellfire", "Into the Earth", "Sun//Eater"]
+  },
+  {
+    "name": "Mass Hysteria",
+    "day": "Thursday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Industrial Metal", "Nu Metal"],
+    "origin": "Paris, France",
+    "formed": 1993,
+    "facts": [
+      "One of France's leading metal bands",
+      "Known for their French lyrics and industrial sound"
+    ],
+    "suggestedSongs": ["L'Enfer Des Dieux", "Contrôle", "Furia"]
+  },
+  {
+    "name": "Massacre",
+    "day": "Sunday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Death Metal"],
+    "origin": "Tampa, Florida, USA",
+    "formed": 1984,
+    "facts": [
+      "Early pioneers of the Florida death metal scene",
+      "Featured members who also played in Death"
+    ],
+    "suggestedSongs": ["From Beyond", "Dawn of Eternity", "Corpsegrinder"]
+  },
+  {
+    "name": "Me First & The Gimme Gimmes",
+    "day": "Friday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Punk Rock", "Cover Band"],
+    "origin": "San Francisco, California, USA",
+    "formed": 1995,
+    "facts": [
+      "Supergroup featuring members from various punk bands",
+      "Known for punk rock covers of popular songs"
+    ],
+    "suggestedSongs": [
+      "I Believe I Can Fly",
+      "End of the Road",
+      "Country Roads"
+    ]
+  },
+  {
+    "name": "Motionless In White",
+    "day": "Thursday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Gothic Metal", "Industrial Metal", "Metalcore"],
+    "origin": "Scranton, Pennsylvania, USA",
+    "formed": 2005,
+    "facts": [
+      "Known for their gothic image and horror-influenced themes",
+      "Blend metalcore with industrial and gothic elements"
+    ],
+    "suggestedSongs": ["Creatures X: To the Grave", "Another Life", "Voices"]
+  },
+  {
+    "name": "Municipal Waste",
+    "day": "Thursday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Thrash Metal", "Crossover Thrash"],
+    "origin": "Richmond, Virginia, USA",
+    "formed": 2001,
+    "facts": [
+      "Known for their fast-paced thrash style and humorous lyrics",
+      "Leaders of the thrash metal revival movement"
+    ],
+    "suggestedSongs": [
+      "Headbanger Face Rip",
+      "The Art of Partying",
+      "Slime and Punishment"
+    ]
+  },
+  {
+    "name": "Myles Kennedy",
+    "day": "Friday",
+    "stage": "Metal Dome",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hard Rock", "Alternative Metal"],
+    "origin": "Spokane, Washington, USA",
+    "formed": 2009,
+    "facts": [
+      "Lead singer of Alter Bridge and touring vocalist for Slash",
+      "Known for his four-octave vocal range"
+    ],
+    "suggestedSongs": ["In Stride", "The Ides of March", "Year of the Tiger"]
+  },
+  {
+    "name": "Nine Inch Nails",
+    "day": "Saturday",
+    "stage": "South Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Industrial Rock", "Industrial Metal", "Alternative Rock"],
+    "origin": "Cleveland, Ohio, USA",
+    "formed": 1988,
+    "facts": [
+      "Primarily the project of Trent Reznor",
+      "Pioneers of industrial rock and industrial metal"
+    ],
+    "suggestedSongs": ["Closer", "Hurt", "The Hand That Feeds"]
+  },
+  {
+    "name": "Northlane",
+    "day": "Friday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Progressive Metalcore", "Djent"],
+    "origin": "Sydney, Australia",
+    "formed": 2009,
+    "facts": [
+      "Known for their progressive approach to metalcore",
+      "Successfully transitioned through multiple vocalist changes"
+    ],
+    "suggestedSongs": ["Quantum Flux", "Bloodline", "Echo Chamber"]
+  },
+  {
+    "name": "Nothing More",
+    "day": "Sunday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Progressive Rock"],
+    "origin": "San Antonio, Texas, USA",
+    "formed": 2003,
+    "facts": [
+      "Known for their innovative live performances",
+      "Singer Jonny Hawkins started as the band's drummer"
+    ],
+    "suggestedSongs": [
+      "This is the Time (Ballast)",
+      "Go to War",
+      "Fade In/Fade Out"
+    ]
+  },
+  {
+    "name": "Nova Twins",
+    "day": "Friday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Rock", "Punk Rock", "Nu Metal"],
+    "origin": "London, England",
+    "formed": 2014,
+    "facts": [
+      "Known for their unique blend of punk, rock, and electronic elements",
+      "Recognized for their DIY approach to music and fashion"
+    ],
+    "suggestedSongs": ["Antagonist", "Choose Your Fighter", "Play Fair"]
+  },
+  {
+    "name": "Novelists",
+    "day": "Saturday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Progressive Metalcore", "Djent"],
+    "origin": "Paris, France",
+    "formed": 2013,
+    "facts": [
+      "Known for their technical proficiency and melodic approach",
+      "Blend of heavy riffs with atmospheric elements"
+    ],
+    "suggestedSongs": ["Head Rush", "Modern Slave", "Lost Cause"]
+  },
+  {
+    "name": "Oomph!",
+    "day": "Saturday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Neue Deutsche Härte", "Industrial Metal"],
+    "origin": "Wolfsburg, Germany",
+    "formed": 1989,
+    "facts": [
+      "Pioneers of the Neue Deutsche Härte genre",
+      "Influenced bands like Rammstein"
+    ],
+    "suggestedSongs": ["Augen Auf!", "Labyrinth", "Gott ist ein Popstar"]
+  },
+  {
+    "name": "Opeth",
+    "day": "Friday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Progressive Metal", "Progressive Rock", "Death Metal"],
+    "origin": "Stockholm, Sweden",
+    "formed": 1989,
+    "facts": [
+      "Known for their evolution from death metal to progressive rock",
+      "Led by Mikael Åkerfeldt's distinctive vocal and guitar work"
+    ],
+    "suggestedSongs": [
+      "Ghost of Perdition",
+      "Blackwater Park",
+      "The Drapery Falls"
+    ]
+  },
+  {
+    "name": "Orange Goblin",
+    "day": "Friday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Stoner Metal", "Doom Metal"],
+    "origin": "London, England",
+    "formed": 1995,
+    "facts": [
+      "One of the leading bands in the UK stoner metal scene",
+      "Originally named Our Haunted Kingdom"
+    ],
+    "suggestedSongs": [
+      "Red Tide Rising",
+      "Time Travelling Blues",
+      "They Come Back"
+    ]
+  },
+  {
+    "name": "Orbit Culture",
+    "day": "Thursday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Melodic Death Metal", "Groove Metal"],
+    "origin": "Eksjö, Sweden",
+    "formed": 2013,
+    "facts": [
+      "Known for combining modern metal with Swedish death metal traditions",
+      "Gained prominence through streaming platforms"
+    ],
+    "suggestedSongs": [
+      "North Star of Nija",
+      "Flight of the Fireflies",
+      "The Newborn One"
+    ]
+  },
+  {
+    "name": "Paleface Swiss",
+    "day": "Sunday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Metalcore", "Hardcore"],
+    "origin": "Zurich, Switzerland",
+    "formed": 2012,
+    "facts": [
+      "Known for their aggressive hardcore style",
+      "One of Switzerland's leading hardcore bands"
+    ],
+    "suggestedSongs": ["The Orphan", "MDMA", "Cursed"]
+  },
+  {
+    "name": "Paradise Lost",
+    "day": "Thursday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Gothic Metal", "Doom Metal"],
+    "origin": "Halifax, England",
+    "formed": 1988,
+    "facts": [
+      "Pioneers of the death/doom and gothic metal genres",
+      "Known for their evolution through various metal styles"
+    ],
+    "suggestedSongs": [
+      "Say Just Words",
+      "Faith Divides Us - Death Unites Us",
+      "One Second"
+    ]
+  },
+  {
+    "name": "Perturbator",
+    "day": "Thursday",
+    "stage": "Metal Dome",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Synthwave", "Dark Synth"],
+    "origin": "Paris, France",
+    "formed": 2012,
+    "facts": [
+      "Former black metal musician turned electronic artist",
+      "Known for dark, cyberpunk-influenced electronic music"
+    ],
+    "suggestedSongs": ["Lustful Sacraments", "Future Club", "Death of the Soul"]
+  },
+  {
+    "name": "Peyton Parrish",
+    "day": "Friday",
+    "stage": "South Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Folk Metal", "Nordic Folk"],
+    "origin": "USA",
+    "formed": 2020,
+    "facts": [
+      "Gained fame through social media covers of folk and metal songs",
+      "Known for deep, powerful vocals and Nordic-inspired music"
+    ],
+    "suggestedSongs": [
+      "Valhalla Calling",
+      "Blood of the Vikings",
+      "The Dragonborn Comes"
+    ]
+  },
+  {
+    "name": "Polaris",
+    "day": "Friday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Metalcore", "Progressive Metalcore"],
+    "origin": "Sydney, Australia",
+    "formed": 2012,
+    "facts": [
+      "One of Australia's leading metalcore bands",
+      "Known for their technical yet melodic approach"
+    ],
+    "suggestedSongs": ["Masochist", "Hypermania", "The Remedy"]
+  },
+  {
+    "name": "Powerwolf",
+    "day": "Thursday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Power Metal"],
+    "origin": "Saarbrücken, Germany",
+    "formed": 2003,
+    "facts": [
+      "Known for their religious-themed imagery and lyrics",
+      "Incorporate church organs and choir elements in their music"
+    ],
+    "suggestedSongs": [
+      "Sanctified with Dynamite",
+      "We Drink Your Blood",
+      "Army of the Night"
+    ]
+  },
+  {
+    "name": "Primordial",
+    "day": "Saturday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Celtic Metal", "Black Metal", "Folk Metal"],
+    "origin": "Skerries, Ireland",
+    "formed": 1987,
+    "facts": [
+      "Known for incorporating Celtic music and Irish themes",
+      "One of Ireland's most successful metal bands"
+    ],
+    "suggestedSongs": ["Empire Falls", "No Grave Deep Enough", "Babel's Tower"]
+  },
+  {
+    "name": "Psychonaut",
+    "day": "Thursday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Post-Metal", "Progressive Metal"],
+    "origin": "Mechelen, Belgium",
+    "formed": 2013,
+    "facts": [
+      "Known for their complex compositions and atmospheric sound",
+      "Blend of psychedelic and progressive elements"
+    ],
+    "suggestedSongs": [
+      "The Great Realisation",
+      "All I Saw as a Huge Monkey",
+      "The Story of Your Enslavement"
+    ]
+  },
+  {
+    "name": "Rise Of The Northstar",
+    "day": "Sunday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Crossover Thrash", "Hardcore"],
+    "origin": "Paris, France",
+    "formed": 2008,
+    "facts": [
+      "Combine hardcore with Japanese pop culture influences",
+      "Known for their manga-inspired aesthetic"
+    ],
+    "suggestedSongs": ["Here Comes The Boom", "Welcame", "Nekketsu"]
+  },
+  {
+    "name": "Sacred Reich",
+    "day": "Sunday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Thrash Metal"],
+    "origin": "Phoenix, Arizona, USA",
+    "formed": 1985,
+    "facts": [
+      "Known for their political and social commentary",
+      "Part of the second wave of thrash metal"
+    ],
+    "suggestedSongs": ["The American Way", "Surf Nicaragua", "Awakening"]
+  },
+  {
+    "name": "Savatage",
+    "day": "Sunday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Progressive Metal", "Power Metal"],
+    "origin": "Tampa, Florida, USA",
+    "formed": 1978,
+    "facts": [
+      "Later evolved into Trans-Siberian Orchestra",
+      "Known for their rock opera style and complex arrangements"
+    ],
+    "suggestedSongs": [
+      "Hall of the Mountain King",
+      "Gutter Ballet",
+      "Edge of Thorns"
+    ]
+  },
+  {
+    "name": "Seven Hours After Violet",
+    "day": "Sunday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Post-Hardcore", "Alternative Metal"],
+    "origin": "Belgium",
+    "formed": 2020,
+    "facts": [
+      "Rising stars in the Belgian post-hardcore scene",
+      "Known for their emotional intensity"
+    ],
+    "suggestedSongs": ["Disengage", "Glass Heart"]
+  },
+  {
+    "name": "SiM",
+    "day": "Sunday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Reggae Rock"],
+    "origin": "Shonan, Japan",
+    "formed": 2004,
+    "facts": [
+      "Known for mixing heavy metal with reggae elements",
+      "Gained international fame through anime soundtracks"
+    ],
+    "suggestedSongs": ["The Rumbling", "EXiSTENCE", "KILL ALL"]
+  },
+  {
+    "name": "Signs of the Swarm",
+    "day": "Thursday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Deathcore", "Technical Death Metal"],
+    "origin": "Pittsburgh, Pennsylvania, USA",
+    "formed": 2013,
+    "facts": [
+      "Known for their technical approach to deathcore",
+      "Features David Simonich's diverse vocal range"
+    ],
+    "suggestedSongs": ["Totem", "Hollow Prison", "The Collection"]
+  },
+  {
+    "name": "Skillet",
+    "day": "Friday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Christian Rock"],
+    "origin": "Memphis, Tennessee, USA",
+    "formed": 1996,
+    "facts": [
+      "One of the most successful Christian rock bands",
+      "Known for their anthemic sound and positive messages"
+    ],
+    "suggestedSongs": ["Monster", "Hero", "Awake and Alive"]
+  },
+  {
+    "name": "Slipknot",
+    "day": "Friday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Nu Metal", "Alternative Metal", "Heavy Metal"],
+    "origin": "Des Moines, Iowa, USA",
+    "formed": 1995,
+    "facts": [
+      "Known for their masks and aggressive performance style",
+      "One of the most successful metal bands of the modern era"
+    ],
+    "suggestedSongs": ["Duality", "Psychosocial", "Before I Forget"]
+  },
+  {
+    "name": "Soen",
+    "day": "Thursday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Progressive Metal", "Alternative Metal"],
+    "origin": "Stockholm, Sweden",
+    "formed": 2004,
+    "facts": [
+      "Features former Opeth drummer Martin Lopez",
+      "Known for their complex arrangements and emotional depth"
+    ],
+    "suggestedSongs": ["Lotus", "Martyrs", "Covenant"]
+  },
+  {
+    "name": "Spectral Wound",
+    "day": "Friday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Black Metal"],
+    "origin": "Montreal, Canada",
+    "formed": 2014,
+    "facts": [
+      "Known for their raw, traditional black metal approach",
+      "Maintain anonymity and mysterious presence"
+    ],
+    "suggestedSongs": [
+      "Imperial Saison Noire",
+      "Woods from Which the Spirits Once Fled",
+      "Soul Destroying Black Debauchery"
+    ]
+  },
+  {
+    "name": "Speed",
+    "day": "Sunday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hardcore Punk", "Crossover Thrash"],
+    "origin": "Sydney, Australia",
+    "formed": 2019,
+    "facts": [
+      "Known for their high-energy performances",
+      "Rapidly rising stars in the hardcore scene"
+    ],
+    "suggestedSongs": ["Not That Nice", "We See U", "One Blood"]
+  },
+  {
+    "name": "Spiritbox",
+    "day": "Saturday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Progressive Metal", "Metalcore"],
+    "origin": "Victoria, British Columbia, Canada",
+    "formed": 2017,
+    "facts": [
+      "Features former Iwrestledabearonce vocalist Courtney LaPlante",
+      "Known for their dynamic range and experimental approach"
+    ],
+    "suggestedSongs": ["Holy Roller", "Circle With Me", "Hurt You"]
+  },
+  {
+    "name": "Starset",
+    "day": "Saturday",
+    "stage": "Metal Dome",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Electronic Rock"],
+    "origin": "Columbus, Ohio, USA",
+    "formed": 2013,
+    "facts": [
+      "Known for their science fiction themes and multimedia approach",
+      "Founded by PhD candidate Dustin Bates"
+    ],
+    "suggestedSongs": ["My Demons", "Monster", "Die For You"]
+  },
+  {
+    "name": "Static Dress",
+    "day": "Friday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Post-Hardcore", "Alternative Metal"],
+    "origin": "Leeds, England",
+    "formed": 2018,
+    "facts": [
+      "Known for their visual aesthetic and storytelling",
+      "Blend of post-hardcore with modern production"
+    ],
+    "suggestedSongs": ["sweet death", "fleahouse", "cubicle"]
+  },
+  {
+    "name": "Stick To Your Guns",
+    "day": "Thursday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hardcore Punk", "Melodic Hardcore"],
+    "origin": "Orange County, California, USA",
+    "formed": 2003,
+    "facts": [
+      "Known for their politically conscious lyrics",
+      "Blend of hardcore aggression with melodic elements"
+    ],
+    "suggestedSongs": ["Against Them All", "Nobody", "Amber"]
+  },
+  {
+    "name": "Stray From The Path",
+    "day": "Sunday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Metalcore", "Hardcore Punk"],
+    "origin": "Long Island, New York, USA",
+    "formed": 2001,
+    "facts": [
+      "Known for their politically charged lyrics",
+      "Incorporate rap and nu metal elements into hardcore"
+    ],
+    "suggestedSongs": [
+      "First World Problem Child",
+      "Badge & A Bullet",
+      "Rising Sun"
+    ]
+  },
+  {
+    "name": "Sylosis",
+    "day": "Saturday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Melodic Death Metal", "Thrash Metal"],
+    "origin": "Reading, England",
+    "formed": 2000,
+    "facts": [
+      "Known for their technical approach to modern metal",
+      "Led by guitarist/vocalist Josh Middleton"
+    ],
+    "suggestedSongs": ["I Sever", "Teras", "Calcified"]
+  },
+  {
+    "name": "Terror",
+    "day": "Thursday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hardcore Punk", "Metalcore"],
+    "origin": "Los Angeles, California, USA",
+    "formed": 2002,
+    "facts": [
+      "One of the most influential modern hardcore bands",
+      "Known for their intense live performances"
+    ],
+    "suggestedSongs": ["Keepers of the Faith", "Stick Tight", "One More Enemy"]
+  },
+  {
+    "name": "The Dead Daisies",
+    "day": "Saturday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hard Rock", "Heavy Metal"],
+    "origin": "Sydney, Australia",
+    "formed": 2012,
+    "facts": [
+      "Supergroup featuring members of various famous rock bands",
+      "Known for their classic rock influenced sound"
+    ],
+    "suggestedSongs": ["Lock 'N' Load", "Rise Up", "Dead and Gone"]
+  },
+  {
+    "name": "The Ghost Inside",
+    "day": "Friday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Metalcore", "Melodic Hardcore"],
+    "origin": "Los Angeles, California, USA",
+    "formed": 2004,
+    "facts": [
+      "Known for their perseverance after a severe bus accident in 2015",
+      "Blend of melodic hardcore with positive lyrics"
+    ],
+    "suggestedSongs": ["Mercy", "Engine 45", "Dark Horse"]
+  },
+  {
+    "name": "The Hu",
+    "day": "Saturday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Folk Metal", "Traditional Mongolian Music"],
+    "origin": "Ulaanbaatar, Mongolia",
+    "formed": 2016,
+    "facts": [
+      "Combine traditional Mongolian instruments with metal",
+      "Known for their throat singing technique"
+    ],
+    "suggestedSongs": ["Wolf Totem", "Yuve Yuve Yu", "This Is Mongol"]
+  },
+  {
+    "name": "The Raven Age",
+    "day": "Thursday",
+    "stage": "Metal Dome",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Melodic Metal", "Alternative Metal"],
+    "origin": "London, England",
+    "formed": 2009,
+    "facts": [
+      "Features George Harris, son of Iron Maiden's Steve Harris",
+      "Known for their melodic approach to modern metal"
+    ],
+    "suggestedSongs": [
+      "Fleur de Lis",
+      "Angel in Disgrace",
+      "Grave of the Fireflies"
+    ]
+  },
+  {
+    "name": "The Warning",
+    "day": "Saturday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hard Rock", "Alternative Metal"],
+    "origin": "Monterrey, Mexico",
+    "formed": 2013,
+    "facts": [
+      "Band of three sisters who gained fame through YouTube",
+      "Known for their powerful live performances"
+    ],
+    "suggestedSongs": ["CHOKE", "EVOLVE", "MONEY"]
+  },
+  {
+    "name": "Thrice",
+    "day": "Sunday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Post-Hardcore", "Alternative Rock", "Experimental Rock"],
+    "origin": "Irvine, California, USA",
+    "formed": 1998,
+    "facts": [
+      "Known for their constant evolution and experimentation",
+      "Blend of post-hardcore with various musical styles"
+    ],
+    "suggestedSongs": [
+      "Black Honey",
+      "The Artist in the Ambulance",
+      "Hurricane"
+    ]
+  },
+  {
+    "name": "Till Lindemann",
+    "day": "Sunday",
+    "stage": "North Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Industrial Metal", "Alternative Metal"],
+    "origin": "Leipzig, Germany",
+    "formed": 2015,
+    "facts": [
+      "Lead singer of Rammstein's solo project",
+      "Known for provocative performances and lyrics"
+    ],
+    "suggestedSongs": ["Skills in Pills", "Steh Auf", "Ich hasse Kinder"]
+  },
+  {
+    "name": "Trash Boat",
+    "day": "Thursday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Post-Hardcore", "Pop Punk"],
+    "origin": "St Albans, England",
+    "formed": 2014,
+    "facts": [
+      "Named after a joke from Regular Show",
+      "Evolution from pop punk to heavier sound"
+    ],
+    "suggestedSongs": ["Don't Stand Still", "He's So Good", "Silence Is Golden"]
+  },
+  {
+    "name": "Tremonti",
+    "day": "Friday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Hard Rock"],
+    "origin": "Orlando, Florida, USA",
+    "formed": 2011,
+    "facts": [
+      "Solo project of Alter Bridge/Creed guitarist Mark Tremonti",
+      "Known for technical guitar work and heavy riffs"
+    ],
+    "suggestedSongs": [
+      "If Not For You",
+      "Flying Monkeys",
+      "Throw Them To The Lions"
+    ]
+  },
+  {
+    "name": "Triptykon",
+    "day": "Sunday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Gothic Metal", "Death Metal", "Doom Metal"],
+    "origin": "Zurich, Switzerland",
+    "formed": 2008,
+    "facts": [
+      "Founded by former Celtic Frost frontman Tom G. Warrior",
+      "Continuation of Celtic Frost's later musical style"
+    ],
+    "suggestedSongs": ["Goetia", "Tree of Suffocating Souls", "Aurorae"]
+  },
+  {
+    "name": "Ugly Kid Joe",
+    "day": "Sunday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hard Rock", "Alternative Metal"],
+    "origin": "Isla Vista, California, USA",
+    "formed": 1987,
+    "facts": [
+      "Known for their cover of \"Cats in the Cradle\"",
+      "Name is a parody of Pretty Boy Floyd"
+    ],
+    "suggestedSongs": ["Everything About You", "Cats in the Cradle", "Neighbor"]
+  },
+  {
+    "name": "Unto Others",
+    "day": "Saturday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Gothic Metal", "Heavy Metal"],
+    "origin": "Portland, Oregon, USA",
+    "formed": 2017,
+    "facts": [
+      "Formerly known as Idle Hands",
+      "Blend traditional heavy metal with gothic rock"
+    ],
+    "suggestedSongs": [
+      "When Will Gods Work Be Done",
+      "Downtown",
+      "Give Me To The Night"
+    ]
+  },
+  {
+    "name": "Villagers Of Ioannina City",
+    "day": "Friday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Psychedelic Rock", "Stoner Rock", "Folk Metal"],
+    "origin": "Ioannina, Greece",
+    "formed": 2007,
+    "facts": [
+      "Incorporate traditional Greek instruments and melodies",
+      "Known for their unique blend of psychedelic rock and folk"
+    ],
+    "suggestedSongs": ["Welcome", "Age of Aquarius", "Father Sun"]
+  },
+  {
+    "name": "Vowws",
+    "day": "Saturday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Industrial Rock", "Dark Wave"],
+    "origin": "Sydney, Australia",
+    "formed": 2012,
+    "facts": [
+      "Known for their dark, atmospheric sound",
+      "Blend of industrial and gothic elements"
+    ],
+    "suggestedSongs": ["Destroy Your Life", "Structure of Love II", "Them"]
+  },
+  {
+    "name": "Warkings",
+    "day": "Thursday",
+    "stage": "North Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Power Metal", "Heavy Metal"],
+    "origin": "Europe",
+    "formed": 2018,
+    "facts": [
+      "Members take on warrior personas from different eras",
+      "Known for their historical and battle themes"
+    ],
+    "suggestedSongs": ["Fight", "Sparta", "Battle Cry"]
+  },
+  {
+    "name": "Whitechapel",
+    "day": "Saturday",
+    "stage": "Marquee",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Deathcore", "Death Metal"],
+    "origin": "Knoxville, Tennessee, USA",
+    "formed": 2006,
+    "facts": [
+      "Named after the London district where Jack the Ripper operated",
+      "Known for their evolution from deathcore to progressive death metal"
+    ],
+    "suggestedSongs": [
+      "The Saw is the Law",
+      "When a Demon Defiles a Witch",
+      "Brimstone"
+    ]
+  },
+  {
+    "name": "Windhand",
+    "day": "Friday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Doom Metal", "Stoner Metal"],
+    "origin": "Richmond, Virginia, USA",
+    "formed": 2008,
+    "facts": [
+      "Known for their heavy, psychedelic doom sound",
+      "Feature Dorthia Cottrell's haunting vocals"
+    ],
+    "suggestedSongs": ["Orchard", "Grey Garden", "Old Evil"]
+  }
+]
