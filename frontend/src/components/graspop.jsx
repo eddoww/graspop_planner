@@ -457,16 +457,138 @@ const GraspopPlanner = () => {
   const restBreaks = getRestBreaks();
   const genreBalance = getGenreBalance();
 
-  // Festival Survival Kit recommendations
+  // Enhanced Festival Survival Kit recommendations
   const getSurvivalKit = () => {
     const mustSeeBands = Object.values(userRatings).filter(r => r.rating >= 4).length;
+    const ratedBands = bands.filter(band => {
+      const rating = userRatings[band.id];
+      return rating && rating.rating >= 4;
+    });
+    
     const kit = [];
     
-    if (mustSeeBands >= 10) kit.push("🔋 Portable charger - You'll be taking lots of photos!");
-    if (mustSeeBands >= 6) kit.push("💧 Extra water bottle - Long days ahead!");
-    if (genreBalance.some(g => g.genre.includes('Metal'))) kit.push("🎧 Earplugs - Protect those ears!");
-    if (restBreaks.length > 0) kit.push("🪑 Portable seat - Those breaks will be needed!");
+    // Schedule-based recommendations
+    if (mustSeeBands >= 15) {
+      kit.push("🔋 Power bank (20,000mAh+) - Marathon festival-goer detected! Your phone will die otherwise");
+      kit.push("☀️ High SPF sunscreen - You'll be outside for 12+ hours daily");
+      kit.push("🧴 Dry shampoo - 4 days of headbanging requires emergency hair fixes");
+    } else if (mustSeeBands >= 8) {
+      kit.push("🔋 Portable charger - Heavy schedule = lots of photos and livestreams");
+      kit.push("☀️ Sunscreen SPF 30+ - Multiple outdoor stages, protect that skin");
+    } else if (mustSeeBands >= 3) {
+      kit.push("🔋 Small power bank - Keep that phone alive for essential moments");
+    }
+
+    // Genre-based recommendations
+    const heavyGenres = ['Death Metal', 'Black Metal', 'Deathcore', 'Grindcore', 'Thrash Metal'];
+    const hasHeavyMetal = ratedBands.some(band => 
+      band.genres.some(genre => heavyGenres.some(heavy => genre.includes(heavy)))
+    );
     
+    if (hasHeavyMetal) {
+      kit.push("🎧 Professional earplugs (25dB reduction) - Death metal will destroy your hearing otherwise");
+      kit.push("🧴 Extra deodorant - Mosh pits get SWEATY, help your neighbors");
+      kit.push("🩹 Band-aids - Mosh pit casualties are real");
+    }
+
+    const hasSymphonic = ratedBands.some(band => 
+      band.genres.some(genre => genre.includes('Symphonic'))
+    );
+    if (hasSymphonic) {
+      kit.push("📱 Good camera - Symphonic shows have amazing stage production");
+    }
+
+    // Time-based recommendations
+    const lateShows = ratedBands.filter(band => {
+      if (!band.start_time) return false;
+      const hour = parseInt(band.start_time.split(':')[0]);
+      return hour >= 22 || hour <= 2; // 10pm - 2am
+    });
+
+    const earlyShows = ratedBands.filter(band => {
+      if (!band.start_time) return false;
+      const hour = parseInt(band.start_time.split(':')[0]);
+      return hour <= 14; // Before 2pm
+    });
+
+    if (lateShows.length >= 3) {
+      kit.push("☕ Caffeine pills/energy drinks - Multiple late shows = you'll need chemical assistance");
+      kit.push("🧥 Light jacket - Belgian nights get cold, even in summer");
+      kit.push("🔦 Phone flashlight or small torch - Dark festival grounds after midnight");
+    }
+
+    if (earlyShows.length >= 2) {
+      kit.push("⏰ Loud alarm clock - Early shows require early arrival, don't oversleep!");
+      kit.push("🥐 Breakfast bars - Early gigs mean missing hotel breakfast");
+    }
+
+    // Stage distribution recommendations
+    const stageDistribution = _.groupBy(ratedBands, 'stage');
+    const stageCount = Object.keys(stageDistribution).length;
+
+    if (stageCount >= 4) {
+      kit.push("🗺️ Festival map screenshot - You're hitting all stages, don't get lost");
+      kit.push("👟 GOOD walking shoes - You'll walk 15km+ per day between stages");
+      kit.push("🧦 Extra socks - Happy feet = happy festival experience");
+    }
+
+    // Weather preparations (Belgium-specific)
+    kit.push("🌧️ Compact rain poncho - It's Belgium... it WILL rain");
+    kit.push("🥾 Waterproof shoes/boots - Graspop mud is legendary");
+    
+    // Day-specific recommendations
+    const byDay = _.groupBy(ratedBands, 'day');
+    Object.entries(byDay).forEach(([day, dayBands]) => {
+      if (dayBands.length >= 6) {
+        kit.push(`📅 ${day}: Energy snacks - ${dayBands.length} bands = 12+ hour day`);
+      }
+    });
+
+    // Conflict-based stress management
+    const conflicts = getScheduleConflicts();
+    const conflictCount = Object.keys(conflicts).length;
+    
+    if (conflictCount >= 3) {
+      kit.push(`😤 Stress ball - ${conflictCount} schedule conflicts detected, you'll need zen`);
+      kit.push("📋 Backup plan notes - Write down your Plan B for each conflict");
+    }
+
+    // Social/practical essentials
+    if (mustSeeBands >= 5) {
+      kit.push("💧 2L water bottle - Dehydration kills festival vibes");
+      kit.push("🧻 Toilet paper - Festival toilets... you know why");
+      kit.push("🧴 Hand sanitizer - Touch everything, stay healthy");
+      kit.push("💰 Cash backup - Card readers fail, beer vendors don't wait");
+    }
+
+    // Photo/memory recommendations
+    if (mustSeeBands >= 8) {
+      kit.push("📱 Extra phone storage - Delete old photos NOW, you'll need space");
+      kit.push("🤳 Selfie stick - Get that perfect stage shot with the crowd");
+    }
+
+    // Veteran festival-goer kit
+    if (mustSeeBands >= 12) {
+      kit.push("🪑 Lightweight folding chair - Pro tip: comfort during long waits");
+      kit.push("🎒 Small backpack with zippers - Keep your stuff secure in crowds");
+      kit.push("🍫 Emergency chocolate - Blood sugar crashes are real at hour 10");
+      kit.push("📞 Portable phone fan - Overheated phones = dead phones");
+      kit.push("🧴 Cooling towel - Neck cooling = instant relief");
+    }
+
+    // Emergency preparedness
+    if (mustSeeBands >= 10) {
+      kit.push("🆔 Emergency contact info - Write it on your arm, seriously");
+      kit.push("💊 Basic pain relief - Headaches and sore feet are inevitable");
+      kit.push("🗂️ Copies of important docs - ID, tickets, hotel info");
+    }
+
+    // Fun extras
+    if (mustSeeBands >= 6) {
+      kit.push("🤘 Bandana/face covering - Look metal + dust protection");
+      kit.push("🍻 Festival cup - Many festivals have refillable cups, save money");
+    }
+
     return kit;
   };
 
@@ -590,18 +712,39 @@ const GraspopPlanner = () => {
             </div>
           </div>
 
-          {/* Survival Kit */}
+          {/* Enhanced Survival Kit */}
           {survivalKit.length > 0 && (
-            <div className="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-              <h4 className="font-medium text-yellow-800 mb-2">🎒 Festival Survival Kit:</h4>
-              <ul className="space-y-1">
-                {survivalKit.map((item, index) => (
-                  <li key={index} className="text-sm text-yellow-700 flex items-start">
-                    <span className="mr-2">•</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            <div className="mt-4 p-6 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg border border-yellow-300">
+              <div className="flex items-center mb-4">
+                <h4 className="font-bold text-yellow-800 text-lg">🎒 Festival Survival Kit</h4>
+                <span className="ml-2 bg-yellow-200 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">
+                  {survivalKit.length} items
+                </span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {survivalKit.map((item, index) => {
+                  const [emoji, ...textParts] = item.split(' ');
+                  const text = textParts.join(' ');
+                  const [itemName, reason] = text.split(' - ');
+                  
+                  return (
+                    <div key={index} className="flex items-start p-3 bg-white rounded-lg shadow-sm border border-yellow-200">
+                      <span className="text-xl mr-3 flex-shrink-0">{emoji}</span>
+                      <div className="min-w-0 flex-1">
+                        <div className="font-medium text-gray-800 text-sm">{itemName}</div>
+                        {reason && (
+                          <div className="text-xs text-gray-600 mt-1 italic">{reason}</div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="mt-4 p-3 bg-yellow-100 rounded-lg">
+                <p className="text-xs text-yellow-700 text-center">
+                  💡 <strong>Pro tip:</strong> This kit is generated based on your specific schedule, genre preferences, and festival conditions!
+                </p>
+              </div>
             </div>
           )}
         </div>
