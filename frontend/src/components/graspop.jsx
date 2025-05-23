@@ -25,6 +25,75 @@ const GraspopPlanner = () => {
   const [discoveryMode, setDiscoveryMode] = useState(false);
   const [viewMode, setViewMode] = useState('list'); // 'list' or 'timeline'
   const [showBucketList, setShowBucketList] = useState(false);
+  const [countdown, setCountdown] = useState(null);
+
+  // Load bands and ratings data
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/bands/`);
+        const data = await response.json();
+        setBands(data);
+
+        // If we have a current user, load their ratings
+        if (currentUser) {
+          const ratingsResponse = await fetch(
+            `${import.meta.env.VITE_API_URL}/users/${currentUser.id}/ratings/`
+          );
+          const ratingsData = await ratingsResponse.json();
+
+          // Convert to a map for easier lookup
+          const ratingsMap = ratingsData.reduce((acc, rating) => {
+            acc[rating.band_id] = rating;
+            return acc;
+          }, {});
+
+          setUserRatings(ratingsMap);
+        }
+      } catch (error) {
+        console.error("Error loading data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadData();
+  }, [currentUser]);
+
+  // Update countdown every minute
+  useEffect(() => {
+    // Festival countdown function
+    const getFestivalCountdown = () => {
+      const festivalStart = new Date('2025-06-19T10:00:00');
+      const now = new Date();
+      const timeDiff = festivalStart - now;
+      
+      if (timeDiff <= 0) {
+        return { isLive: true, message: "🔥 GRASPOP IS LIVE! 🔥" };
+      }
+      
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      
+      return { 
+        isLive: false, 
+        days, 
+        hours, 
+        minutes,
+        message: `${days}d ${hours}h ${minutes}m until Graspop!` 
+      };
+    };
+
+    // Initialize countdown
+    setCountdown(getFestivalCountdown());
+    
+    const timer = setInterval(() => {
+      setCountdown(getFestivalCountdown());
+    }, 60000); // Update every minute
+
+    return () => clearInterval(timer);
+  }, []);
 
   // Function to detect schedule conflicts
   const getScheduleConflicts = () => {
@@ -282,39 +351,6 @@ const GraspopPlanner = () => {
     );
   };
 
-  // Load bands and ratings data
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/bands/`);
-        const data = await response.json();
-        setBands(data);
-
-        // If we have a current user, load their ratings
-        if (currentUser) {
-          const ratingsResponse = await fetch(
-            `${import.meta.env.VITE_API_URL}/users/${currentUser.id}/ratings/`
-          );
-          const ratingsData = await ratingsResponse.json();
-
-          // Convert to a map for easier lookup
-          const ratingsMap = ratingsData.reduce((acc, rating) => {
-            acc[rating.band_id] = rating;
-            return acc;
-          }, {});
-
-          setUserRatings(ratingsMap);
-        }
-      } catch (error) {
-        console.error("Error loading data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadData();
-  }, [currentUser]);
-
   // Update rating on the backend
   const updateBandRating = async (bandId, updates) => {
     if (!currentUser) return;
@@ -436,40 +472,6 @@ const GraspopPlanner = () => {
 
   const survivalKit = getSurvivalKit();
 
-  // Festival countdown
-  const getFestivalCountdown = () => {
-    const festivalStart = new Date('2025-06-19T10:00:00'); // Graspop 2025 starts June 19, 2025
-    const now = new Date();
-    const timeDiff = festivalStart - now;
-    
-    if (timeDiff <= 0) {
-      return { isLive: true, message: "🔥 GRASPOP IS LIVE! 🔥" };
-    }
-    
-    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-    
-    return { 
-      isLive: false, 
-      days, 
-      hours, 
-      minutes,
-      message: `${days}d ${hours}h ${minutes}m until Graspop!` 
-    };
-  };
-
-  const [countdown, setCountdown] = useState(getFestivalCountdown());
-
-  // Update countdown every minute
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown(getFestivalCountdown());
-    }, 60000); // Update every minute
-
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <div className="min-h-screen bg-gray-50 p-4">
       <div className="container mx-auto max-w-5xl">
@@ -477,35 +479,37 @@ const GraspopPlanner = () => {
         <UserSelection />
 
         {/* Festival Countdown */}
-        <div className={`rounded-lg shadow-lg mb-6 text-white overflow-hidden ${
-          countdown.isLive 
-            ? 'bg-gradient-to-r from-red-600 to-orange-600 animate-pulse' 
-            : 'bg-gradient-to-r from-purple-600 to-blue-600'
-        }`}>
-          <div className="p-4 text-center">
-            <h2 className="text-xl font-bold mb-2">🎸 GRASPOP METAL MEETING 2025 🎸</h2>
-            <div className="text-2xl font-mono">
-              {countdown.isLive ? (
-                countdown.message
-              ) : (
-                <div className="flex justify-center space-x-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold">{countdown.days}</div>
-                    <div className="text-sm">DAYS</div>
+        {countdown && (
+          <div className={`rounded-lg shadow-lg mb-6 text-white overflow-hidden ${
+            countdown.isLive 
+              ? 'bg-gradient-to-r from-red-600 to-orange-600 animate-pulse' 
+              : 'bg-gradient-to-r from-purple-600 to-blue-600'
+          }`}>
+            <div className="p-4 text-center">
+              <h2 className="text-xl font-bold mb-2">🎸 GRASPOP METAL MEETING 2025 🎸</h2>
+              <div className="text-2xl font-mono">
+                {countdown.isLive ? (
+                  countdown.message
+                ) : (
+                  <div className="flex justify-center space-x-6">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold">{countdown.days}</div>
+                      <div className="text-sm">DAYS</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold">{countdown.hours}</div>
+                      <div className="text-sm">HOURS</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold">{countdown.minutes}</div>
+                      <div className="text-sm">MINUTES</div>
+                    </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold">{countdown.hours}</div>
-                    <div className="text-sm">HOURS</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold">{countdown.minutes}</div>
-                    <div className="text-sm">MINUTES</div>
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Header */}
         <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl shadow-xl mb-8 p-8 text-white">
