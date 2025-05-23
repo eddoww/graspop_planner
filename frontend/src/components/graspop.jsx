@@ -34,12 +34,40 @@ const GraspopPlanner = () => {
     });
 
     const conflicts = {};
+    
+    // Helper function to check if two time ranges overlap
+    const timesOverlap = (start1, end1, start2, end2) => {
+      if (!start1 || !end1 || !start2 || !end2) return false;
+      
+      const convertToMinutes = (timeStr) => {
+        const [hours, minutes] = timeStr.split(':').map(Number);
+        return hours * 60 + minutes;
+      };
+      
+      const start1Min = convertToMinutes(start1);
+      const end1Min = convertToMinutes(end1);
+      const start2Min = convertToMinutes(start2);
+      const end2Min = convertToMinutes(end2);
+      
+      // Check if ranges overlap
+      return start1Min < end2Min && start2Min < end1Min;
+    };
+
     wantToSee.forEach(band => {
-      const conflictingBands = wantToSee.filter(otherBand => 
-        otherBand.id !== band.id && 
-        otherBand.day === band.day &&
-        otherBand.stage !== band.stage // Different stages on same day = potential conflict
-      );
+      const conflictingBands = wantToSee.filter(otherBand => {
+        if (otherBand.id === band.id) return false;
+        
+        // Must be same day
+        if (otherBand.day !== band.day) return false;
+        
+        // If they have time information, check for overlaps
+        if (band.start_time && band.end_time && otherBand.start_time && otherBand.end_time) {
+          return timesOverlap(band.start_time, band.end_time, otherBand.start_time, otherBand.end_time);
+        }
+        
+        // Fallback: if no time info, consider different stages as potential conflicts
+        return otherBand.stage !== band.stage;
+      });
       
       if (conflictingBands.length > 0) {
         conflicts[band.id] = conflictingBands;
@@ -78,7 +106,8 @@ const GraspopPlanner = () => {
         scheduleText += `📅 ${day.toUpperCase()}\n`;
         dayBands.forEach(band => {
           const rating = userRatings[band.id];
-          scheduleText += `⭐ ${band.name} - ${band.stage} (${rating.rating}/5 stars)\n`;
+          const timeInfo = band.start_time && band.end_time ? ` ${band.start_time}-${band.end_time}` : '';
+          scheduleText += `⭐ ${band.name} - ${band.stage}${timeInfo} (${rating.rating}/5 stars)\n`;
           if (rating.notes) {
             scheduleText += `   💭 ${rating.notes}\n`;
           }
@@ -151,7 +180,19 @@ const GraspopPlanner = () => {
       })
       .sort((a, b) => {
         const dayOrder = { Thursday: 0, Friday: 1, Saturday: 2, Sunday: 3 };
-        return dayOrder[a.day] - dayOrder[b.day];
+        const dayDiff = dayOrder[a.day] - dayOrder[b.day];
+        if (dayDiff !== 0) return dayDiff;
+        
+        // If same day, sort by start time if available
+        if (a.start_time && b.start_time) {
+          const timeA = a.start_time.split(':').map(Number);
+          const timeB = b.start_time.split(':').map(Number);
+          const minutesA = timeA[0] * 60 + timeA[1];
+          const minutesB = timeB[0] * 60 + timeB[1];
+          return minutesA - minutesB;
+        }
+        
+        return 0;
       });
 
     const byDay = _.groupBy(mySchedule, 'day');
@@ -176,6 +217,11 @@ const GraspopPlanner = () => {
                       <div className="text-sm text-gray-600 flex items-center">
                         <MapPin size={14} className="mr-1" />
                         {band.stage}
+                        {band.start_time && band.end_time && (
+                          <span className="ml-2 text-blue-600 font-mono">
+                            {band.start_time}-{band.end_time}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className={`text-sm font-medium ${energy.color}`}>
@@ -390,11 +436,76 @@ const GraspopPlanner = () => {
 
   const survivalKit = getSurvivalKit();
 
+  // Festival countdown
+  const getFestivalCountdown = () => {
+    const festivalStart = new Date('2025-06-19T10:00:00'); // Graspop 2025 starts June 19, 2025
+    const now = new Date();
+    const timeDiff = festivalStart - now;
+    
+    if (timeDiff <= 0) {
+      return { isLive: true, message: "🔥 GRASPOP IS LIVE! 🔥" };
+    }
+    
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    return { 
+      isLive: false, 
+      days, 
+      hours, 
+      minutes,
+      message: `${days}d ${hours}h ${minutes}m until Graspop!` 
+    };
+  };
+
+  const [countdown, setCountdown] = useState(getFestivalCountdown());
+
+  // Update countdown every minute
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown(getFestivalCountdown());
+    }, 60000); // Update every minute
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50 p-4">
       <div className="container mx-auto max-w-5xl">
         {/* User Selection */}
         <UserSelection />
+
+        {/* Festival Countdown */}
+        <div className={`rounded-lg shadow-lg mb-6 text-white overflow-hidden ${
+          countdown.isLive 
+            ? 'bg-gradient-to-r from-red-600 to-orange-600 animate-pulse' 
+            : 'bg-gradient-to-r from-purple-600 to-blue-600'
+        }`}>
+          <div className="p-4 text-center">
+            <h2 className="text-xl font-bold mb-2">🎸 GRASPOP METAL MEETING 2025 🎸</h2>
+            <div className="text-2xl font-mono">
+              {countdown.isLive ? (
+                countdown.message
+              ) : (
+                <div className="flex justify-center space-x-6">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold">{countdown.days}</div>
+                    <div className="text-sm">DAYS</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold">{countdown.hours}</div>
+                    <div className="text-sm">HOURS</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold">{countdown.minutes}</div>
+                    <div className="text-sm">MINUTES</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
 
         {/* Header */}
         <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl shadow-xl mb-8 p-8 text-white">
@@ -600,13 +711,20 @@ const GraspopPlanner = () => {
                           {hasConflict && (
                             <div className="flex items-center mt-1 text-orange-600 text-sm">
                               <AlertTriangle size={16} className="mr-1" />
-                              Schedule conflict with {hasConflict.map(c => c.name).join(', ')}
+                              Time conflict with {hasConflict.map(c => 
+                                `${c.name}${c.start_time && c.end_time ? ` (${c.start_time}-${c.end_time})` : ''}`
+                              ).join(', ')}
                             </div>
                           )}
                         </div>
                         <div className="flex items-center gap-2 text-sm">
                           <span className="font-medium text-gray-600">
                             {band.day}
+                            {band.start_time && band.end_time && (
+                              <span className="ml-1 text-blue-600 font-mono">
+                                {band.start_time}-{band.end_time}
+                              </span>
+                            )}
                           </span>
                           <span
                             className={`px-3 py-1 rounded-full text-sm font-medium ${

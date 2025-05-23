@@ -36,6 +36,8 @@ def init_bands():
             existing_band = existing_bands[band_name]
             existing_band.day = band_data['day']
             existing_band.stage = band_data['stage']
+            existing_band.start_time = band_data.get('start_time')
+            existing_band.end_time = band_data.get('end_time')
             existing_band.genres = band_data['genres']
             existing_band.facts = band_data['facts']
             existing_band.suggested_songs = band_data['suggestedSongs']
@@ -46,6 +48,8 @@ def init_bands():
                 name=band_data['name'],
                 day=band_data['day'],
                 stage=band_data['stage'],
+                start_time=band_data.get('start_time'),
+                end_time=band_data.get('end_time'),
                 genres=band_data['genres'],
                 facts=band_data['facts'],
                 suggested_songs=band_data['suggestedSongs']

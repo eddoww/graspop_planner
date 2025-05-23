@@ -19,6 +19,8 @@ class Band(Base):
     name = Column(String, unique=True, index=True)
     day = Column(String)
     stage = Column(String)
+    start_time = Column(String, nullable=True)  # Format: "14:30"
+    end_time = Column(String, nullable=True)    # Format: "15:30"
     genres = Column(ARRAY(String))
     facts = Column(ARRAY(String))
     suggested_songs = Column(ARRAY(String))
