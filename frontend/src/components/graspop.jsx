@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Star, Music, ChevronDown, ChevronUp, AlertTriangle, Download, Share } from "lucide-react";
+import { Star, Music, ChevronDown, ChevronUp, AlertTriangle, Download, Share, Calendar, List, Clock, MapPin } from "lucide-react";
 import _ from "lodash";
 import UserSelection from "./UserSelection";
 import { useUser } from "../contexts/UserContext";
@@ -23,6 +23,8 @@ const GraspopPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [userRatings, setUserRatings] = useState({});
   const [discoveryMode, setDiscoveryMode] = useState(false);
+  const [viewMode, setViewMode] = useState('list'); // 'list' or 'timeline'
+  const [showBucketList, setShowBucketList] = useState(false);
 
   // Function to detect schedule conflicts
   const getScheduleConflicts = () => {
@@ -88,6 +90,150 @@ const GraspopPlanner = () => {
         alert('Schedule copied to clipboard!');
       });
     }
+  };
+
+  // Creative planning helpers
+  const getEnergyLevel = (rating) => {
+    if (rating >= 5) return { emoji: '🔥', label: 'MUST SEE', color: 'text-red-600' };
+    if (rating >= 4) return { emoji: '⭐', label: 'Want to see', color: 'text-yellow-600' };
+    if (rating >= 3) return { emoji: '👍', label: 'Interested', color: 'text-green-600' };
+    if (rating >= 2) return { emoji: '🤔', label: 'Maybe', color: 'text-blue-600' };
+    return { emoji: '❌', label: 'Skip', color: 'text-gray-400' };
+  };
+
+  const getRestBreaks = () => {
+    const mySchedule = bands
+      .filter(band => {
+        const rating = userRatings[band.id];
+        return rating && rating.rating >= 4;
+      })
+      .sort((a, b) => {
+        const dayOrder = { Thursday: 0, Friday: 1, Saturday: 2, Sunday: 3 };
+        return dayOrder[a.day] - dayOrder[b.day];
+      });
+
+    const breakSuggestions = [];
+    const byDay = _.groupBy(mySchedule, 'day');
+    
+    Object.entries(byDay).forEach(([day, dayBands]) => {
+      if (dayBands.length >= 4) {
+        breakSuggestions.push(`${day}: Consider a break after ${Math.floor(dayBands.length/2)} bands`);
+      }
+    });
+    
+    return breakSuggestions;
+  };
+
+  const getGenreBalance = () => {
+    const ratedBands = bands.filter(band => {
+      const rating = userRatings[band.id];
+      return rating && rating.rating >= 4;
+    });
+
+    const genreCounts = {};
+    ratedBands.forEach(band => {
+      band.genres.forEach(genre => {
+        genreCounts[genre] = (genreCounts[genre] || 0) + 1;
+      });
+    });
+
+    return Object.entries(genreCounts)
+      .sort(([,a], [,b]) => b - a)
+      .slice(0, 3)
+      .map(([genre, count]) => ({ genre, count }));
+  };
+
+  const TimelineView = () => {
+    const mySchedule = bands
+      .filter(band => {
+        const rating = userRatings[band.id];
+        return rating && rating.rating >= 4;
+      })
+      .sort((a, b) => {
+        const dayOrder = { Thursday: 0, Friday: 1, Saturday: 2, Sunday: 3 };
+        return dayOrder[a.day] - dayOrder[b.day];
+      });
+
+    const byDay = _.groupBy(mySchedule, 'day');
+
+    return (
+      <div className="space-y-6">
+        {Object.entries(byDay).map(([day, dayBands]) => (
+          <div key={day} className="bg-white rounded-lg p-6 shadow-md">
+            <h3 className="text-xl font-bold mb-4 text-gray-800 flex items-center">
+              <Calendar className="mr-2" size={20} />
+              {day} - {dayBands.length} bands
+            </h3>
+            <div className="space-y-3">
+              {dayBands.map((band, index) => {
+                const rating = userRatings[band.id];
+                const energy = getEnergyLevel(rating.rating);
+                return (
+                  <div key={band.id} className="flex items-center p-3 bg-gray-50 rounded-lg">
+                    <div className="text-2xl mr-3">{energy.emoji}</div>
+                    <div className="flex-grow">
+                      <div className="font-semibold">{band.name}</div>
+                      <div className="text-sm text-gray-600 flex items-center">
+                        <MapPin size={14} className="mr-1" />
+                        {band.stage}
+                      </div>
+                    </div>
+                    <div className={`text-sm font-medium ${energy.color}`}>
+                      {energy.label}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const BucketListView = () => {
+    const unratedBands = bands.filter(band => !userRatings[band.id] || userRatings[band.id].rating === 0);
+    const randomBands = _.shuffle(unratedBands).slice(0, 5);
+
+    return (
+      <div className="bg-white rounded-lg p-6 shadow-md mb-6">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+          🎯 Quick Rate - Band Bucket List
+          <button 
+            onClick={() => setShowBucketList(false)}
+            className="ml-auto text-gray-400 hover:text-gray-600"
+          >
+            ✕
+          </button>
+        </h3>
+        <p className="text-sm text-gray-600 mb-4">Rate these random bands quickly to build your schedule:</p>
+        <div className="space-y-4">
+          {randomBands.map(band => (
+            <div key={band.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div>
+                <div className="font-semibold">{band.name}</div>
+                <div className="text-sm text-gray-600">{band.genres.slice(0, 2).join(', ')}</div>
+              </div>
+              <div className="flex gap-1">
+                {[1, 2, 3, 4, 5].map((rating) => (
+                  <button
+                    key={rating}
+                    onClick={() => updateBandRating(band.id, { rating })}
+                    className="p-1 hover:bg-yellow-100 rounded transition-colors"
+                  >
+                    <Star
+                      size={20}
+                      className="text-yellow-400 hover:text-yellow-500"
+                      fill="none"
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   };
 
   // Load bands and ratings data
@@ -226,6 +372,24 @@ const GraspopPlanner = () => {
     mustSee: Object.values(userRatings).filter((r) => r.rating >= 4).length,
   };
 
+  const restBreaks = getRestBreaks();
+  const genreBalance = getGenreBalance();
+
+  // Festival Survival Kit recommendations
+  const getSurvivalKit = () => {
+    const mustSeeBands = Object.values(userRatings).filter(r => r.rating >= 4).length;
+    const kit = [];
+    
+    if (mustSeeBands >= 10) kit.push("🔋 Portable charger - You'll be taking lots of photos!");
+    if (mustSeeBands >= 6) kit.push("💧 Extra water bottle - Long days ahead!");
+    if (genreBalance.some(g => g.genre.includes('Metal'))) kit.push("🎧 Earplugs - Protect those ears!");
+    if (restBreaks.length > 0) kit.push("🪑 Portable seat - Those breaks will be needed!");
+    
+    return kit;
+  };
+
+  const survivalKit = getSurvivalKit();
+
   return (
     <div className="min-h-screen bg-gray-50 p-4">
       <div className="container mx-auto max-w-5xl">
@@ -257,6 +421,79 @@ const GraspopPlanner = () => {
           </div>
         </div>
 
+        {/* Creative Planning Insights */}
+        <div className="bg-white rounded-lg shadow-md mb-6 p-6">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+            <Clock className="mr-2" size={20} />
+            Festival Planning Insights
+          </h3>
+          
+          {/* Genre Balance */}
+          {genreBalance.length > 0 && (
+            <div className="mb-4">
+              <h4 className="font-medium text-gray-700 mb-2">Your Music Vibe:</h4>
+              <div className="flex flex-wrap gap-2">
+                {genreBalance.map(({ genre, count }) => (
+                  <span key={genre} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                    {genre} ({count} bands)
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Rest Break Suggestions */}
+          {restBreaks.length > 0 && (
+            <div className="mb-4">
+              <h4 className="font-medium text-gray-700 mb-2">💪 Stamina Tips:</h4>
+              <ul className="space-y-1">
+                {restBreaks.map((suggestion, index) => (
+                  <li key={index} className="text-sm text-gray-600 flex items-start">
+                    <span className="mr-2">•</span>
+                    {suggestion}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Stage Distribution */}
+          <div>
+            <h4 className="font-medium text-gray-700 mb-2">🎪 Stage Distribution:</h4>
+            <div className="text-sm text-gray-600">
+              {Object.entries(_.groupBy(
+                bands.filter(band => {
+                  const rating = userRatings[band.id];
+                  return rating && rating.rating >= 4;
+                }), 
+                'stage'
+              )).map(([stage, stageBands]) => (
+                <span key={stage} className="mr-4">
+                  {stage}: {stageBands.length}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Survival Kit */}
+          {survivalKit.length > 0 && (
+            <div className="mt-4 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+              <h4 className="font-medium text-yellow-800 mb-2">🎒 Festival Survival Kit:</h4>
+              <ul className="space-y-1">
+                {survivalKit.map((item, index) => (
+                  <li key={index} className="text-sm text-yellow-700 flex items-start">
+                    <span className="mr-2">•</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        {/* Bucket List */}
+        {showBucketList && <BucketListView />}
+
         {/* Export Options */}
         <div className="bg-white rounded-lg shadow-md mb-6 p-4">
           <h3 className="text-lg font-semibold mb-3 text-gray-800">Export Your Schedule</h3>
@@ -274,6 +511,12 @@ const GraspopPlanner = () => {
             >
               <Download size={18} />
               Download JSON
+            </button>
+            <button
+              onClick={() => setShowBucketList(!showBucketList)}
+              className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              🎯 Quick Rate
             </button>
           </div>
         </div>
@@ -320,9 +563,24 @@ const GraspopPlanner = () => {
           >
             🔍 Discovery Mode
           </button>
+
+          <button
+            onClick={() => setViewMode(viewMode === 'list' ? 'timeline' : 'list')}
+            className={`px-4 py-2 rounded-lg border transition-colors ${
+              viewMode === 'timeline' 
+                ? 'bg-green-600 text-white border-green-600' 
+                : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
+            }`}
+          >
+            {viewMode === 'list' ? <Calendar size={18} /> : <List size={18} />}
+            <span className="ml-2">{viewMode === 'list' ? 'Timeline' : 'List'} View</span>
+          </button>
         </div>
 
-        {/* Band List */}
+        {/* Band List or Timeline */}
+        {viewMode === 'timeline' ? (
+          <TimelineView />
+        ) : (
         <div className="space-y-4">
           {sortedBands.map((band) => {
             const userRating = userRatings[band.id] || {};
@@ -492,6 +750,7 @@ const GraspopPlanner = () => {
             );
           })}
         </div>
+        )}
       </div>
     </div>
   );
