@@ -2190,5 +2190,307 @@
       "Feature Dorthia Cottrell's haunting vocals"
     ],
     "suggestedSongs": ["Orchard", "Grey Garden", "Old Evil"]
+  },
+  {
+    "name": "Behemoth",
+    "day": "Friday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Blackened Death Metal", "Extreme Metal"],
+    "origin": "Gda?sk, Poland",
+    "formed": 1991,
+    "facts": [
+      "One of Poland's most influential extreme metal bands alongside Vader",
+      "Evolved from traditional black metal to blackened death metal",
+      "Known for their controversial anti-religious themes and theatrical performances",
+      "Led by Adam 'Nergal' Darski who faced legal charges for tearing up a Bible on stage"
+    ],
+    "suggestedSongs": ["Ov Fire and the Void", "Demiurge", "The Satanist"]
+  },
+  {
+    "name": "Bullet For My Valentine",
+    "day": "Saturday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Metalcore", "Heavy Metal", "Alternative Metal"],
+    "origin": "Bridgend, Wales",
+    "formed": 1998,
+    "facts": [
+      "Originally formed as 'Jeff Killed John' before changing name and style",
+      "One of the most successful British metal bands since Iron Maiden",
+      "Known for their melodic approach to metalcore with dual guitar harmonies",
+      "Debut album 'The Poison' achieved gold certification"
+    ],
+    "suggestedSongs": ["Tears Don't Fall", "Your Betrayal", "Waking the Demon"]
+  },
+  {
+    "name": "Brutus",
+    "day": "Saturday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Post-Metal", "Post-Hardcore", "Post-Rock"],
+    "origin": "Leuven, Belgium",
+    "formed": 2013,
+    "facts": [
+      "Trio featuring drummer-vocalist Stefanie Mannaerts in a rare dual role",
+      "Known for combining heavy riffs with atmospheric passages and emotional vocals",
+      "Gained international recognition after recording in Vancouver",
+      "Praised by Metallica's Lars Ulrich and members of Dillinger Escape Plan"
+    ],
+    "suggestedSongs": ["War", "Sugar Dragon", "Cemetery"]
+  },
+  {
+    "name": "Poppy",
+    "day": "Saturday",
+    "stage": "North Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Industrial Metal", "Art Pop"],
+    "origin": "Boston, Massachusetts, USA",
+    "formed": 2014,
+    "facts": [
+      "Started as a surreal YouTube performance artist before transitioning to music",
+      "Known for genre-hopping from bubblegum pop to industrial metal",
+      "Real name is Moriah Rose Pereira",
+      "Has received Grammy nominations for her metal collaborations"
+    ],
+    "suggestedSongs": ["I Disagree", "Concrete", "Bloodmoney"]
+  },
+  {
+    "name": "Yellowcard",
+    "day": "Thursday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Pop Punk", "Alternative Rock"],
+    "origin": "Jacksonville, Florida, USA",
+    "formed": 1997,
+    "facts": [
+      "Known for incorporating violin into pop-punk, making them unique in the genre",
+      "Sean Mackin is their classically trained violinist",
+      "Biggest hit 'Ocean Avenue' achieved double platinum status",
+      "Disbanded in 2017 but reunited for anniversary tours"
+    ],
+    "suggestedSongs": ["Ocean Avenue", "Only One", "Way Away"]
+  },
+  {
+    "name": "Aviva",
+    "day": "Sunday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Rock", "Pop Rock"],
+    "origin": "United States",
+    "formed": 2017,
+    "facts": [
+      "Rising alternative rock artist known for powerful vocals",
+      "Gained popularity through streaming platforms and social media"
+    ],
+    "suggestedSongs": ["GRRRLS", "BRR"]
+  },
+  {
+    "name": "Bloodhunter",
+    "day": "Friday",
+    "stage": "Marquee",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Symphonic Metal", "Death Metal"],
+    "origin": "Galicia, Spain",
+    "formed": 2008,
+    "facts": [
+      "Female-fronted symphonic death metal band",
+      "Known for combining brutal death metal with orchestral arrangements"
+    ],
+    "suggestedSongs": ["The End of Faith", "Escape"]
+  },
+  {
+    "name": "Dirty Honey",
+    "day": "Saturday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hard Rock", "Blues Rock"],
+    "origin": "Los Angeles, California, USA",
+    "formed": 2017,
+    "facts": [
+      "Modern hard rock band with classic rock influences",
+      "First unsigned band to reach #1 on Billboard Mainstream Rock chart"
+    ],
+    "suggestedSongs": ["When I'm Gone", "Rolling 7s"]
+  },
+  {
+    "name": "Grandson",
+    "day": "Saturday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Rock", "Industrial Rock", "Rap Rock"],
+    "origin": "Toronto, Canada / Los Angeles, California, USA",
+    "formed": 2016,
+    "facts": [
+      "Known for politically charged lyrics and genre-blending approach",
+      "Combines rock, electronic, and hip-hop elements"
+    ],
+    "suggestedSongs": ["Blood // Water", "Stick Up"]
+  },
+  {
+    "name": "Power Trip",
+    "day": "Sunday",
+    "stage": "North Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Thrash Metal", "Crossover Thrash", "Hardcore Punk"],
+    "origin": "Dallas, Texas, USA",
+    "formed": 2008,
+    "facts": [
+      "Known for combining classic thrash metal with hardcore punk energy",
+      "Gained critical acclaim for revitalizing crossover thrash"
+    ],
+    "suggestedSongs": ["Executioner's Tax", "Nightmare Logic"]
+  },
+  {
+    "name": "Pro-Pain",
+    "day": "Friday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hardcore Punk", "Thrash Metal"],
+    "origin": "New York, USA",
+    "formed": 1991,
+    "facts": [
+      "Founded by former Crumbsuckers members",
+      "Known for their aggressive hardcore-thrash crossover sound"
+    ],
+    "suggestedSongs": ["Make War (Not Love)", "Foul Taste of Freedom"]
+  },
+  {
+    "name": "Self Deception",
+    "day": "Saturday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Hard Rock"],
+    "origin": "Sweden",
+    "formed": 2015,
+    "facts": [
+      "Swedish alternative metal band with melodic sensibilities",
+      "Known for combining heavy riffs with accessible melodies"
+    ],
+    "suggestedSongs": ["Consumed", "The Way You Were"]
+  },
+  {
+    "name": "Skindred",
+    "day": "Saturday",
+    "stage": "North Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Nu Metal", "Reggae Metal"],
+    "origin": "Newport, Wales",
+    "formed": 1998,
+    "facts": [
+      "Unique blend of metal with reggae and dancehall influences",
+      "Fronted by Benji Webbe, known for energetic live performances",
+      "Coined the term 'ragga-metal' to describe their sound"
+    ],
+    "suggestedSongs": ["Nobody", "Warning", "Pressure"]
+  },
+  {
+    "name": "Smash Into Pieces",
+    "day": "Friday",
+    "stage": "Metal Dome",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Alternative Metal", "Industrial Metal"],
+    "origin": "Örebro, Sweden",
+    "formed": 2008,
+    "facts": [
+      "Swedish band known for their theatrical masked performances",
+      "Combines heavy metal with electronic and industrial elements"
+    ],
+    "suggestedSongs": ["Higher", "Cut You Loose"]
+  },
+  {
+    "name": "Soulfly",
+    "day": "Saturday",
+    "stage": "South Stage",
+    "isFirstTime": false,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Groove Metal", "Nu Metal", "Thrash Metal"],
+    "origin": "Phoenix, Arizona, USA",
+    "formed": 1997,
+    "facts": [
+      "Founded by Max Cavalera after leaving Sepultura",
+      "Known for incorporating world music and tribal elements into metal",
+      "Features rotating lineup of guest musicians and family members"
+    ],
+    "suggestedSongs": ["Jumpdafuckup", "Back to the Primitive", "Prophecy"]
+  },
+  {
+    "name": "Unprocessed",
+    "day": "Friday",
+    "stage": "Metal Dome",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Progressive Metal", "Djent", "Alternative Metal"],
+    "origin": "Wiesbaden, Germany",
+    "formed": 2015,
+    "facts": [
+      "German progressive metal band known for technical proficiency",
+      "Blend heavy riffs with melodic passages and complex rhythms"
+    ],
+    "suggestedSongs": ["Blackbone", "Thrash"]
+  },
+  {
+    "name": "Vandenberg",
+    "day": "Saturday",
+    "stage": "Jupiler Stage",
+    "isFirstTime": true,
+    "rating": 0,
+    "listened": false,
+    "notes": "",
+    "genres": ["Hard Rock", "Heavy Metal"],
+    "origin": "Netherlands",
+    "formed": 1981,
+    "facts": [
+      "Founded by guitarist Adrian Vandenberg (Whitesnake)",
+      "Classic Dutch hard rock band reformed after decades",
+      "Known for melodic guitar-driven hard rock"
+    ],
+    "suggestedSongs": ["Burning Heart", "Friday Night"]
   }
 ]
