@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Star, Music, ChevronDown, ChevronUp } from "lucide-react";
+import { Star, Music, ChevronDown, ChevronUp, AlertTriangle, Download, Share } from "lucide-react";
 import _ from "lodash";
 import UserSelection from "./UserSelection";
 import { useUser } from "../contexts/UserContext";
@@ -22,6 +22,73 @@ const GraspopPlanner = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [userRatings, setUserRatings] = useState({});
+  const [discoveryMode, setDiscoveryMode] = useState(false);
+
+  // Function to detect schedule conflicts
+  const getScheduleConflicts = () => {
+    const wantToSee = bands.filter(band => {
+      const rating = userRatings[band.id];
+      return rating && rating.rating >= 4; // 4+ stars means "want to see"
+    });
+
+    const conflicts = {};
+    wantToSee.forEach(band => {
+      const conflictingBands = wantToSee.filter(otherBand => 
+        otherBand.id !== band.id && 
+        otherBand.day === band.day &&
+        otherBand.stage !== band.stage // Different stages on same day = potential conflict
+      );
+      
+      if (conflictingBands.length > 0) {
+        conflicts[band.id] = conflictingBands;
+      }
+    });
+
+    return conflicts;
+  };
+
+  // Export schedule functions
+  const exportSchedule = (format = 'text') => {
+    const mySchedule = bands
+      .filter(band => {
+        const rating = userRatings[band.id];
+        return rating && rating.rating >= 4;
+      })
+      .sort((a, b) => {
+        const dayOrder = { Thursday: 0, Friday: 1, Saturday: 2, Sunday: 3 };
+        return dayOrder[a.day] - dayOrder[b.day];
+      });
+
+    if (format === 'json') {
+      const data = JSON.stringify(mySchedule, null, 2);
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `graspop-schedule-${currentUser?.name || 'user'}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } else {
+      let scheduleText = `🎸 GRASPOP SCHEDULE - ${currentUser?.name || 'User'}\n\n`;
+      
+      const byDay = _.groupBy(mySchedule, 'day');
+      Object.entries(byDay).forEach(([day, dayBands]) => {
+        scheduleText += `📅 ${day.toUpperCase()}\n`;
+        dayBands.forEach(band => {
+          const rating = userRatings[band.id];
+          scheduleText += `⭐ ${band.name} - ${band.stage} (${rating.rating}/5 stars)\n`;
+          if (rating.notes) {
+            scheduleText += `   💭 ${rating.notes}\n`;
+          }
+        });
+        scheduleText += '\n';
+      });
+
+      navigator.clipboard.writeText(scheduleText).then(() => {
+        alert('Schedule copied to clipboard!');
+      });
+    }
+  };
 
   // Load bands and ratings data
   useEffect(() => {
@@ -137,7 +204,14 @@ const GraspopPlanner = () => {
         band.genres.some((genre) =>
           genre.toLowerCase().includes(searchTerm.toLowerCase())
         )
-    );
+    )
+    .filter((band) => {
+      if (discoveryMode) {
+        // In discovery mode, only show unrated bands
+        return !userRatings[band.id] || userRatings[band.id].rating === 0;
+      }
+      return true;
+    });
 
   const sortedBands = _.orderBy(filteredBands, [sortBy], ["asc"]);
 
@@ -183,6 +257,27 @@ const GraspopPlanner = () => {
           </div>
         </div>
 
+        {/* Export Options */}
+        <div className="bg-white rounded-lg shadow-md mb-6 p-4">
+          <h3 className="text-lg font-semibold mb-3 text-gray-800">Export Your Schedule</h3>
+          <div className="flex gap-3">
+            <button
+              onClick={() => exportSchedule('text')}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              <Share size={18} />
+              Copy to Clipboard
+            </button>
+            <button
+              onClick={() => exportSchedule('json')}
+              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+            >
+              <Download size={18} />
+              Download JSON
+            </button>
+          </div>
+        </div>
+
         {/* Filters - remain the same */}
         <div className="bg-white rounded-lg shadow-md mb-8 p-4 flex flex-wrap gap-4">
           <select
@@ -214,22 +309,43 @@ const GraspopPlanner = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+
+          <button
+            onClick={() => setDiscoveryMode(!discoveryMode)}
+            className={`px-4 py-2 rounded-lg border transition-colors ${
+              discoveryMode 
+                ? 'bg-purple-600 text-white border-purple-600' 
+                : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
+            }`}
+          >
+            🔍 Discovery Mode
+          </button>
         </div>
 
         {/* Band List */}
         <div className="space-y-4">
           {sortedBands.map((band) => {
             const userRating = userRatings[band.id] || {};
+            const conflicts = getScheduleConflicts();
+            const hasConflict = conflicts[band.id];
             return (
               <div
                 key={band.id}
-                className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 overflow-hidden"
+                className={`bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 overflow-hidden ${hasConflict ? 'border-l-4 border-orange-400' : ''}`}
               >
                 <div className="p-4">
                   <div className="flex justify-between items-start">
                     <div className="flex-grow">
                       <div className="flex justify-between items-center mb-2">
-                        <h3 className="text-xl font-bold">{band.name}</h3>
+                        <div className="flex-grow">
+                          <h3 className="text-xl font-bold">{band.name}</h3>
+                          {hasConflict && (
+                            <div className="flex items-center mt-1 text-orange-600 text-sm">
+                              <AlertTriangle size={16} className="mr-1" />
+                              Schedule conflict with {hasConflict.map(c => c.name).join(', ')}
+                            </div>
+                          )}
+                        </div>
                         <div className="flex items-center gap-2 text-sm">
                           <span className="font-medium text-gray-600">
                             {band.day}
