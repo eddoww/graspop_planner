@@ -19,6 +19,21 @@ import {
   List,
   FileText,
   GitBranch,
+  Utensils,
+  Navigation,
+  Battery,
+  CloudRain,
+  DollarSign,
+  Camera,
+  Bell,
+  Heart,
+  Brain,
+  Route,
+  Award,
+  Music2,
+  Lightbulb,
+  CheckCircle,
+  XCircle,
 } from "lucide-react";
 import _ from "lodash";
 
@@ -30,9 +45,13 @@ const FestivalPlanner = () => {
   const [filterDay, setFilterDay] = useState("all");
   const [sortBy, setSortBy] = useState("avgRating");
   const [searchTerm, setSearchTerm] = useState("");
-  const [viewMode, setViewMode] = useState("list"); // 'list', 'timeline', 'conflicts', 'consensus'
+  const [viewMode, setViewMode] = useState("list"); // 'list', 'timeline', 'conflicts', 'consensus', 'suggestions', 'planner', 'analytics'
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [minGroupSize, setMinGroupSize] = useState(2);
+  const [groupNotes, setGroupNotes] = useState({});
+  const [budgetTracking, setBudgetTracking] = useState({});
+  const [weatherPlan, setWeatherPlan] = useState("sunny");
+  const [energyManagement, setEnergyManagement] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -129,6 +148,13 @@ const FestivalPlanner = () => {
         ])
       ),
     };
+  };
+
+  const timeToMinutes = (timeStr) => {
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    let adjustedHours = hours;
+    if (hours < 11) adjustedHours += 24; // Next day hours
+    return (adjustedHours - 11) * 60 + minutes;
   };
 
   const getTimeConflicts = () => {
@@ -245,21 +271,933 @@ const FestivalPlanner = () => {
     return meetings;
   };
 
+  // NEW FEATURE: Gap Analysis & Smart Suggestions
+  const getScheduleGaps = () => {
+    const activeUsers = users.filter((user) => selectedUsers.includes(user.id));
+    const gaps = [];
+
+    ["Thursday", "Friday", "Saturday", "Sunday"].forEach((day) => {
+      // Get bands the group wants to see on this day
+      const dayWantToSee = bands
+        .filter((band) => {
+          if (band.day !== day) return false;
+          const stats = calculateBandStats(band);
+          return stats.mustSeeCount >= minGroupSize;
+        })
+        .sort((a, b) =>
+          (a.start_time || "12:00").localeCompare(b.start_time || "12:00")
+        );
+
+      // Find gaps between wanted bands
+      for (let i = 0; i < dayWantToSee.length - 1; i++) {
+        const currentBand = dayWantToSee[i];
+        const nextBand = dayWantToSee[i + 1];
+
+        if (currentBand.end_time && nextBand.start_time) {
+          const gapMinutes =
+            timeToMinutes(nextBand.start_time) -
+            timeToMinutes(currentBand.end_time);
+
+          if (gapMinutes >= 60) {
+            // 1+ hour gap
+            gaps.push({
+              day,
+              startTime: currentBand.end_time,
+              endTime: nextBand.start_time,
+              duration: gapMinutes,
+              location:
+                currentBand.stage === nextBand.stage
+                  ? currentBand.stage
+                  : "Between stages",
+              type: gapMinutes >= 120 ? "meal_break" : "discovery_time",
+            });
+          }
+        }
+      }
+    });
+
+    return gaps;
+  };
+
+  const getSuggestedBands = () => {
+    const activeUsers = users.filter((user) => selectedUsers.includes(user.id));
+    const gaps = getScheduleGaps();
+    const suggestions = [];
+
+    // Analyze group music taste
+    const likedGenres = {};
+    const likedBands = bands.filter((band) => {
+      const stats = calculateBandStats(band);
+      return stats.avgRating >= 3.5 && stats.ratedCount >= 2;
+    });
+
+    likedBands.forEach((band) => {
+      band.genres.forEach((genre) => {
+        likedGenres[genre] = (likedGenres[genre] || 0) + 1;
+      });
+    });
+
+    const topGenres = Object.entries(likedGenres)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 5)
+      .map(([genre]) => genre);
+
+    // Find unrated bands in gaps that match group taste
+    gaps.forEach((gap) => {
+      const gapBands = bands.filter((band) => {
+        if (band.day !== gap.day) return false;
+        if (!band.start_time) return false;
+
+        const stats = calculateBandStats(band);
+        if (stats.ratedCount >= activeUsers.length * 0.5) return false; // Already well-rated
+
+        const bandStart = timeToMinutes(band.start_time);
+        const gapStart = timeToMinutes(gap.startTime);
+        const gapEnd = timeToMinutes(gap.endTime);
+
+        return bandStart >= gapStart && bandStart <= gapEnd;
+      });
+
+      // Score bands based on genre match
+      const scoredBands = gapBands
+        .map((band) => {
+          const genreMatches = band.genres.filter((genre) =>
+            topGenres.includes(genre)
+          ).length;
+          const score = genreMatches / band.genres.length;
+          return { ...band, matchScore: score };
+        })
+        .filter((band) => band.matchScore > 0)
+        .sort((a, b) => b.matchScore - a.matchScore);
+
+      if (scoredBands.length > 0) {
+        suggestions.push({
+          gap,
+          recommendedBands: scoredBands.slice(0, 3),
+          reason: `Based on your group's taste for ${topGenres
+            .slice(0, 2)
+            .join(" and ")}`,
+        });
+      }
+    });
+
+    return suggestions;
+  };
+
+  // NEW FEATURE: Energy Management
+  const getEnergyOptimizedSchedule = () => {
+    const activeUsers = users.filter((user) => selectedUsers.includes(user.id));
+    const wantToSee = bands.filter((band) => {
+      const stats = calculateBandStats(band);
+      return stats.mustSeeCount >= minGroupSize;
+    });
+
+    const energyLevels = {
+      "Death Metal": 5,
+      "Black Metal": 5,
+      "Thrash Metal": 5,
+      "Heavy Metal": 4,
+      "Power Metal": 4,
+      "Progressive Metal": 3,
+      "Symphonic Metal": 3,
+      "Alternative Metal": 3,
+      "Hard Rock": 2,
+      Rock: 2,
+      Blues: 1,
+    };
+
+    const schedule = {};
+    ["Thursday", "Friday", "Saturday", "Sunday"].forEach((day) => {
+      const dayBands = wantToSee
+        .filter((band) => band.day === day)
+        .map((band) => ({
+          ...band,
+          energyLevel: Math.max(
+            ...band.genres.map((genre) => energyLevels[genre] || 3)
+          ),
+        }))
+        .sort((a, b) =>
+          (a.start_time || "12:00").localeCompare(b.start_time || "12:00")
+        );
+
+      let totalEnergy = 0;
+      let consecutiveHigh = 0;
+      const warnings = [];
+
+      dayBands.forEach((band, index) => {
+        totalEnergy += band.energyLevel;
+
+        if (band.energyLevel >= 4) {
+          consecutiveHigh++;
+          if (consecutiveHigh >= 3) {
+            warnings.push(
+              `Energy overload around ${band.name} - consider a break`
+            );
+          }
+        } else {
+          consecutiveHigh = 0;
+        }
+      });
+
+      schedule[day] = {
+        bands: dayBands,
+        totalEnergy,
+        avgEnergy: dayBands.length > 0 ? totalEnergy / dayBands.length : 0,
+        warnings,
+      };
+    });
+
+    return schedule;
+  };
+
+  // NEW FEATURE: Food & Break Planning
+  const getFoodBreakPlan = () => {
+    const schedule = getEnergyOptimizedSchedule();
+    const foodPlan = {};
+
+    Object.entries(schedule).forEach(([day, daySchedule]) => {
+      const breaks = [];
+      const bands = daySchedule.bands;
+
+      // Suggested meal times
+      breaks.push({
+        time: "12:00",
+        type: "lunch",
+        duration: 45,
+        reason: "Fuel up before the main acts",
+        location: "Food court",
+      });
+
+      if (bands.length >= 4) {
+        breaks.push({
+          time: "17:30",
+          type: "dinner",
+          duration: 60,
+          reason: "Dinner before evening shows",
+          location: "Restaurant area",
+        });
+      }
+
+      // Energy-based breaks
+      daySchedule.warnings.forEach((warning) => {
+        breaks.push({
+          time: "TBD",
+          type: "energy_break",
+          duration: 30,
+          reason: warning,
+          location: "Quiet area",
+        });
+      });
+
+      foodPlan[day] = breaks;
+    });
+
+    return foodPlan;
+  };
+
+  // NEW FEATURE: Budget Tracking
+  const getBudgetEstimate = () => {
+    const activeUsers = users.filter((user) => selectedUsers.includes(user.id));
+    const wantToSee = bands.filter((band) => {
+      const stats = calculateBandStats(band);
+      return stats.mustSeeCount >= minGroupSize;
+    });
+
+    const estimates = {
+      food: {
+        perDay: 35, // €35 per day per person
+        total: 35 * 4 * activeUsers.length,
+        breakdown: "Breakfast €8, Lunch €12, Dinner €15",
+      },
+      drinks: {
+        perDay: 25, // €25 per day per person
+        total: 25 * 4 * activeUsers.length,
+        breakdown: "Beer €4-6, Water €3, Coffee €3",
+      },
+      merchandise: {
+        perBand: 25, // €25 average per band shirt
+        estimated:
+          Math.min(wantToSee.length * 0.3, 5) * 25 * activeUsers.length,
+        breakdown: "T-shirts €20-30, Posters €10-15",
+      },
+      transport: {
+        parking: 15 * 4, // €15 per day parking
+        fuel: 50, // Estimated fuel
+        total: 110,
+      },
+    };
+
+    estimates.grandTotal =
+      estimates.food.total +
+      estimates.drinks.total +
+      estimates.merchandise.estimated +
+      estimates.transport.total;
+
+    return estimates;
+  };
+
+  // NEW FEATURE: Weather Planning
+  const getWeatherPlan = () => {
+    const plans = {
+      sunny: {
+        icon: "☀️",
+        essentials: [
+          "Sunscreen SPF50+",
+          "Hat/cap",
+          "Sunglasses",
+          "Light clothing",
+        ],
+        warnings: ["Stay hydrated", "Seek shade during breaks"],
+        stagePrefs: "Indoor stages during peak sun (12-16h)",
+      },
+      rainy: {
+        icon: "🌧️",
+        essentials: [
+          "Waterproof jacket",
+          "Rain boots",
+          "Waterproof bag",
+          "Towels",
+        ],
+        warnings: ["Mud at outdoor stages", "Longer walking times"],
+        stagePrefs: "Prioritize covered stages, plan indoor backup acts",
+      },
+      cloudy: {
+        icon: "☁️",
+        essentials: ["Light jacket", "Layers", "Umbrella (just in case)"],
+        warnings: ["Temperature can drop in evening"],
+        stagePrefs: "Perfect weather for any stage",
+      },
+    };
+
+    return plans[weatherPlan] || plans.sunny;
+  };
+
+  // NEW FEATURE: Group Analytics - FIXED
+  const getGroupAnalytics = () => {
+    const activeUsers = users.filter((user) => selectedUsers.includes(user.id));
+
+    // Music taste similarity
+    const userSimilarity = [];
+    activeUsers.forEach((user1) => {
+      activeUsers.forEach((user2) => {
+        if (user1.id !== user2.id && user1.id < user2.id) {
+          // Avoid duplicates and self-comparison
+          const user1Ratings = allRatings[user1.id] || {};
+          const user2Ratings = allRatings[user2.id] || {};
+
+          const commonBands = bands.filter(
+            (band) =>
+              user1Ratings[band.id] &&
+              user2Ratings[band.id] &&
+              user1Ratings[band.id].rating > 0 &&
+              user2Ratings[band.id].rating > 0
+          );
+
+          if (commonBands.length >= 3) {
+            const correlation = _.round(
+              1 -
+                _.sumBy(commonBands, (band) =>
+                  Math.abs(
+                    user1Ratings[band.id].rating - user2Ratings[band.id].rating
+                  )
+                ) /
+                  (commonBands.length * 4),
+              2
+            );
+
+            userSimilarity.push({
+              users: [user1.name, user2.name],
+              similarity: Math.max(0, correlation),
+              commonBands: commonBands.length,
+            });
+          }
+        }
+      });
+    });
+
+    // Genre analysis
+    const genrePreferences = {};
+    activeUsers.forEach((user) => {
+      const userRatings = allRatings[user.id] || {};
+      genrePreferences[user.name] = {};
+
+      bands.forEach((band) => {
+        const rating = userRatings[band.id];
+        if (rating && rating.rating >= 4) {
+          band.genres.forEach((genre) => {
+            genrePreferences[user.name][genre] =
+              (genrePreferences[user.name][genre] || 0) + 1;
+          });
+        }
+      });
+    });
+
+    // Group stats
+    const allUserRatings = Object.values(allRatings).flatMap((userRatings) =>
+      Object.values(userRatings)
+        .filter((r) => r.rating > 0)
+        .map((r) => r.rating)
+    );
+
+    return {
+      userSimilarity: userSimilarity.sort(
+        (a, b) => b.similarity - a.similarity
+      ),
+      genrePreferences,
+      groupStats: {
+        totalRated: _.sum(
+          Object.values(allRatings).map(
+            (userRatings) =>
+              Object.values(userRatings).filter((r) => r.rating > 0).length
+          )
+        ),
+        avgGroupRating:
+          allUserRatings.length > 0 ? _.round(_.mean(allUserRatings), 2) : 0,
+      },
+    };
+  };
+
+  // NEW VIEW: Smart Suggestions
+  const SuggestionsView = () => {
+    const suggestions = getSuggestedBands();
+    const gaps = getScheduleGaps();
+
+    return (
+      <div className="space-y-6">
+        {/* Gap Analysis */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-xl font-bold mb-4 flex items-center text-blue-600">
+            <Clock className="mr-2" />
+            Schedule Gaps Analysis
+          </h3>
+
+          {gaps.length === 0 ? (
+            <div className="text-gray-600 flex items-center">
+              <CheckCircle className="mr-2 text-green-500" />
+              Your schedule is packed! No significant gaps found.
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {gaps.map((gap, index) => (
+                <div
+                  key={index}
+                  className="border border-blue-200 rounded-lg p-4 bg-blue-50"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-semibold text-blue-800">
+                      {gap.day} - {gap.startTime} to {gap.endTime}
+                    </h4>
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm ${
+                        gap.type === "meal_break"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-purple-100 text-purple-800"
+                      }`}
+                    >
+                      {gap.type === "meal_break"
+                        ? "🍽️ Perfect for meals"
+                        : "🔍 Discovery time"}
+                    </span>
+                  </div>
+                  <div className="text-sm text-blue-700">
+                    {Math.floor(gap.duration / 60)}h {gap.duration % 60}m gap at{" "}
+                    {gap.location}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Band Suggestions */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-xl font-bold mb-4 flex items-center text-purple-600">
+            <Lightbulb className="mr-2" />
+            Smart Band Suggestions
+          </h3>
+
+          {suggestions.length === 0 ? (
+            <div className="text-gray-600">
+              No suggestions right now - your schedule is well optimized or you
+              need to rate more bands!
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {suggestions.map((suggestion, index) => (
+                <div
+                  key={index}
+                  className="border border-purple-200 rounded-lg p-4 bg-purple-50"
+                >
+                  <div className="mb-3">
+                    <h4 className="font-semibold text-purple-800">
+                      {suggestion.gap.day} - {suggestion.gap.startTime} to{" "}
+                      {suggestion.gap.endTime}
+                    </h4>
+                    <p className="text-sm text-purple-700 italic">
+                      {suggestion.reason}
+                    </p>
+                  </div>
+
+                  <div className="space-y-3">
+                    {suggestion.recommendedBands.map((band) => (
+                      <div
+                        key={band.id}
+                        className="flex items-center justify-between p-3 bg-white rounded-lg"
+                      >
+                        <div>
+                          <div className="font-medium">{band.name}</div>
+                          <div className="text-sm text-gray-600">
+                            {band.stage} - {band.start_time || "TBD"}
+                          </div>
+                          <div className="text-xs text-purple-600">
+                            Genres: {band.genres.join(", ")}
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-purple-700 font-bold">
+                            {Math.round(band.matchScore * 100)}% match
+                          </div>
+                          <div className="flex gap-1 mt-1">
+                            {[3, 4, 5].map((rating) => (
+                              <button
+                                key={rating}
+                                onClick={() => {
+                                  console.log(
+                                    `Quick rate ${band.name} with ${rating} stars`
+                                  );
+                                  alert(
+                                    `Quick rated ${band.name} with ${rating} stars!`
+                                  );
+                                }}
+                                className="px-2 py-1 text-xs bg-purple-600 text-white rounded hover:bg-purple-700"
+                              >
+                                {rating}★
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  // NEW VIEW: Day Planner
+  const PlannerView = () => {
+    const energySchedule = getEnergyOptimizedSchedule();
+    const foodPlan = getFoodBreakPlan();
+    const budget = getBudgetEstimate();
+    const weather = getWeatherPlan();
+
+    return (
+      <div className="space-y-6">
+        {/* Weather Planning */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-xl font-bold mb-4 flex items-center text-blue-600">
+            <CloudRain className="mr-2" />
+            Weather Planning
+          </h3>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Expected Weather:
+            </label>
+            <select
+              value={weatherPlan}
+              onChange={(e) => setWeatherPlan(e.target.value)}
+              className="px-4 py-2 border rounded-lg"
+            >
+              <option value="sunny">☀️ Sunny</option>
+              <option value="rainy">🌧️ Rainy</option>
+              <option value="cloudy">☁️ Cloudy</option>
+            </select>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <h4 className="font-semibold text-blue-800 mb-2 flex items-center">
+                <Utensils className="mr-2" size={18} />
+                Essentials
+              </h4>
+              <ul className="text-sm space-y-1">
+                {weather.essentials.map((item, index) => (
+                  <li key={index} className="flex items-center">
+                    <CheckCircle size={14} className="mr-2 text-green-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="bg-yellow-50 p-4 rounded-lg">
+              <h4 className="font-semibold text-yellow-800 mb-2 flex items-center">
+                <AlertTriangle className="mr-2" size={18} />
+                Warnings
+              </h4>
+              <ul className="text-sm space-y-1">
+                {weather.warnings.map((warning, index) => (
+                  <li key={index} className="flex items-start">
+                    <Bell
+                      size={14}
+                      className="mr-2 text-yellow-600 mt-0.5 flex-shrink-0"
+                    />
+                    {warning}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="bg-green-50 p-4 rounded-lg">
+              <h4 className="font-semibold text-green-800 mb-2 flex items-center">
+                <Navigation className="mr-2" size={18} />
+                Stage Strategy
+              </h4>
+              <p className="text-sm text-green-700">{weather.stagePrefs}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Energy Management */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-xl font-bold mb-4 flex items-center text-orange-600">
+            <Battery className="mr-2" />
+            Energy Management
+          </h3>
+
+          <div className="space-y-4">
+            {Object.entries(energySchedule).map(([day, schedule]) => (
+              <div
+                key={day}
+                className="border border-orange-200 rounded-lg p-4 bg-orange-50"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="font-semibold text-orange-800">{day}</h4>
+                  <div className="flex items-center space-x-4">
+                    <span className="text-sm text-orange-700">
+                      Avg Energy: {schedule.avgEnergy.toFixed(1)}/5
+                    </span>
+                    <div className="flex">
+                      {[1, 2, 3, 4, 5].map((level) => (
+                        <div
+                          key={level}
+                          className={`w-3 h-3 mx-0.5 rounded ${
+                            level <= schedule.avgEnergy
+                              ? "bg-orange-500"
+                              : "bg-gray-300"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {schedule.warnings.length > 0 && (
+                  <div className="mb-3">
+                    {schedule.warnings.map((warning, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center text-sm text-orange-700"
+                      >
+                        <AlertTriangle size={14} className="mr-2" />
+                        {warning}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                  {schedule.bands.map((band) => (
+                    <div key={band.id} className="bg-white p-2 rounded text-xs">
+                      <div className="font-medium truncate">{band.name}</div>
+                      <div className="flex items-center justify-between">
+                        <span>{band.start_time}</span>
+                        <div className="flex">
+                          {[1, 2, 3, 4, 5].map((level) => (
+                            <div
+                              key={level}
+                              className={`w-1.5 h-1.5 mx-0.5 rounded ${
+                                level <= band.energyLevel
+                                  ? "bg-red-500"
+                                  : "bg-gray-300"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Food & Break Planning */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-xl font-bold mb-4 flex items-center text-green-600">
+            <Utensils className="mr-2" />
+            Food & Break Planning
+          </h3>
+
+          <div className="space-y-4">
+            {Object.entries(foodPlan).map(([day, breaks]) => (
+              <div
+                key={day}
+                className="border border-green-200 rounded-lg p-4 bg-green-50"
+              >
+                <h4 className="font-semibold text-green-800 mb-3">{day}</h4>
+                <div className="space-y-2">
+                  {breaks.map((breakItem, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-2 bg-white rounded"
+                    >
+                      <div className="flex items-center">
+                        <div
+                          className={`w-3 h-3 rounded-full mr-3 ${
+                            breakItem.type === "lunch"
+                              ? "bg-yellow-500"
+                              : breakItem.type === "dinner"
+                              ? "bg-orange-500"
+                              : "bg-blue-500"
+                          }`}
+                        />
+                        <div>
+                          <div className="font-medium">
+                            {breakItem.time} -{" "}
+                            {breakItem.type.replace("_", " ")}
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            {breakItem.reason}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {breakItem.duration}min at {breakItem.location}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Budget Planning */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-xl font-bold mb-4 flex items-center text-purple-600">
+            <DollarSign className="mr-2" />
+            Budget Estimate
+          </h3>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              {Object.entries(budget)
+                .filter(([key]) => key !== "grandTotal")
+                .map(([category, data]) => (
+                  <div
+                    key={category}
+                    className="border border-purple-200 rounded-lg p-4"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold text-purple-800 capitalize">
+                        {category.replace(/([A-Z])/g, " $1").trim()}
+                      </h4>
+                      <span className="text-purple-700 font-bold">
+                        €{data.total || data.estimated || data.perDay}
+                      </span>
+                    </div>
+                    <div className="text-sm text-purple-600">
+                      {data.breakdown}
+                    </div>
+                  </div>
+                ))}
+            </div>
+
+            <div className="flex items-center justify-center">
+              <div className="text-center p-6 bg-purple-50 rounded-lg">
+                <div className="text-3xl font-bold text-purple-800 mb-2">
+                  €{budget.grandTotal}
+                </div>
+                <div className="text-purple-600">Total Estimated Cost</div>
+                <div className="text-sm text-purple-500 mt-2">
+                  €
+                  {Math.round(
+                    budget.grandTotal /
+                      users.filter((u) => selectedUsers.includes(u.id)).length
+                  )}{" "}
+                  per person
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // NEW VIEW: Group Analytics
+  const AnalyticsView = () => {
+    const analytics = getGroupAnalytics();
+
+    return (
+      <div className="space-y-6">
+        {/* Group Stats Overview */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-xl font-bold mb-4 flex items-center text-green-600">
+            <Award className="mr-2" />
+            Group Overview
+          </h3>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="text-center p-4 bg-green-50 rounded-lg">
+              <div className="text-3xl font-bold text-green-700">
+                {analytics.groupStats.totalRated}
+              </div>
+              <div className="text-green-600">Total Ratings</div>
+            </div>
+            <div className="text-center p-4 bg-blue-50 rounded-lg">
+              <div className="text-3xl font-bold text-blue-700">
+                {analytics.groupStats.avgGroupRating}
+              </div>
+              <div className="text-blue-600">Average Rating</div>
+            </div>
+            <div className="text-center p-4 bg-purple-50 rounded-lg">
+              <div className="text-3xl font-bold text-purple-700">
+                {users.filter((u) => selectedUsers.includes(u.id)).length}
+              </div>
+              <div className="text-purple-600">Active Members</div>
+            </div>
+          </div>
+        </div>
+
+        {/* User Similarity */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-xl font-bold mb-4 flex items-center text-blue-600">
+            <Heart className="mr-2" />
+            Music Taste Compatibility
+          </h3>
+
+          {analytics.userSimilarity.length === 0 ? (
+            <div className="text-gray-600">
+              Rate more bands to see compatibility analysis!
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {analytics.userSimilarity.slice(0, 5).map((pair, index) => (
+                <div
+                  key={index}
+                  className="flex items-center justify-between p-3 bg-blue-50 rounded-lg"
+                >
+                  <div>
+                    <div className="font-medium">
+                      {pair.users[0]} & {pair.users[1]}
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      {pair.commonBands} bands rated by both
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-2xl font-bold text-blue-700">
+                      {Math.round(pair.similarity * 100)}%
+                    </div>
+                    <div className="text-sm text-blue-600">Compatible</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Genre Preferences */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <h3 className="text-xl font-bold mb-4 flex items-center text-purple-600">
+            <Music2 className="mr-2" />
+            Genre Preferences by User
+          </h3>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            {Object.entries(analytics.genrePreferences).map(
+              ([userName, genres]) => (
+                <div
+                  key={userName}
+                  className="border border-purple-200 rounded-lg p-4"
+                >
+                  <h4 className="font-semibold text-purple-800 mb-3">
+                    {userName}
+                  </h4>
+                  <div className="space-y-2">
+                    {Object.entries(genres)
+                      .sort(([, a], [, b]) => b - a)
+                      .slice(0, 5)
+                      .map(([genre, count]) => (
+                        <div
+                          key={genre}
+                          className="flex items-center justify-between"
+                        >
+                          <span className="text-sm">{genre}</span>
+                          <div className="flex items-center">
+                            <div className="w-20 bg-gray-200 rounded-full h-2 mr-2">
+                              <div
+                                className="bg-purple-600 h-2 rounded-full"
+                                style={{
+                                  width: `${
+                                    (count /
+                                      Math.max(...Object.values(genres))) *
+                                    100
+                                  }%`,
+                                }}
+                              />
+                            </div>
+                            <span className="text-sm font-medium">{count}</span>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const exportGroupSchedule = () => {
     const activeUsers = users.filter((user) => selectedUsers.includes(user.id));
     const conflicts = getTimeConflicts();
     const meetings = getGroupMeetingPoints();
+    const suggestions = getSuggestedBands();
+    const budget = getBudgetEstimate();
+    const weather = getWeatherPlan();
 
-    let scheduleText = `?? GRASPOP GROUP SCHEDULE\n`;
-    scheduleText += `?? Group: ${activeUsers
+    let scheduleText = `🎸 GRASPOP GROUP SCHEDULE\n`;
+    scheduleText += `👥 Group: ${activeUsers
       .map((u) => u.name)
       .join(", ")}\n\n`;
 
+    // Weather plan
+    scheduleText += `🌤️ WEATHER PLAN (${weatherPlan}):\n`;
+    scheduleText += `Essential items: ${weather.essentials.join(", ")}\n`;
+    scheduleText += `Strategy: ${weather.stagePrefs}\n\n`;
+
+    // Budget summary
+    scheduleText += `💰 BUDGET ESTIMATE:\n`;
+    scheduleText += `Total: €${budget.grandTotal} (€${Math.round(
+      budget.grandTotal / activeUsers.length
+    )} per person)\n\n`;
+
     // Meeting points
     if (meetings.length > 0) {
-      scheduleText += `?? MEETING POINTS:\n`;
+      scheduleText += `📍 MEETING POINTS:\n`;
       meetings.forEach((meeting) => {
-        scheduleText += `� ${meeting.day} ${meeting.time} - ${meeting.location} (${meeting.reason})\n`;
+        scheduleText += `• ${meeting.day} ${meeting.time} - ${meeting.location} (${meeting.reason})\n`;
       });
       scheduleText += "\n";
     }
@@ -272,7 +1210,7 @@ const FestivalPlanner = () => {
 
     const byDay = _.groupBy(consensusBands, "day");
     Object.entries(byDay).forEach(([day, dayBands]) => {
-      scheduleText += `?? ${day.toUpperCase()}\n`;
+      scheduleText += `📅 ${day.toUpperCase()}\n`;
       dayBands
         .sort((a, b) =>
           (a.start_time || "99:99").localeCompare(b.start_time || "99:99")
@@ -283,10 +1221,10 @@ const FestivalPlanner = () => {
             band.start_time && band.end_time
               ? ` ${band.start_time}-${band.end_time}`
               : "";
-          scheduleText += `? ${band.name} - ${band.stage}${timeInfo}\n`;
-          scheduleText += `   ?? ${stats.mustSeeCount}/${
+          scheduleText += `⭐ ${band.name} - ${band.stage}${timeInfo}\n`;
+          scheduleText += `   👥 ${stats.mustSeeCount}/${
             activeUsers.length
-          } want to see (${stats.avgRating.toFixed(1)}? avg)\n`;
+          } want to see (${stats.avgRating.toFixed(1)}★ avg)\n`;
 
           const attendees = activeUsers.filter((user) => {
             const rating = allRatings[user.id]?.[band.id];
@@ -299,16 +1237,30 @@ const FestivalPlanner = () => {
       scheduleText += "\n";
     });
 
+    // Suggestions
+    if (suggestions.length > 0) {
+      scheduleText += `💡 DISCOVERY SUGGESTIONS:\n`;
+      suggestions.forEach((suggestion) => {
+        scheduleText += `• ${suggestion.gap.day} ${suggestion.gap.startTime}-${suggestion.gap.endTime}:\n`;
+        suggestion.recommendedBands.forEach((band) => {
+          scheduleText += `  - ${band.name} (${Math.round(
+            band.matchScore * 100
+          )}% match)\n`;
+        });
+      });
+      scheduleText += "\n";
+    }
+
     // Conflicts
     if (Object.keys(conflicts).length > 0) {
-      scheduleText += `?? CONFLICTS TO RESOLVE:\n`;
+      scheduleText += `⚠️ CONFLICTS TO RESOLVE:\n`;
       Object.values(conflicts).forEach((conflict) => {
-        scheduleText += `� ${conflict.day} ${conflict.time}: ${conflict.conflicts.length} scheduling conflicts\n`;
+        scheduleText += `• ${conflict.day} ${conflict.time}: ${conflict.conflicts.length} scheduling conflicts\n`;
       });
     }
 
     navigator.clipboard.writeText(scheduleText).then(() => {
-      alert("Group schedule copied to clipboard!");
+      alert("Comprehensive group schedule copied to clipboard!");
     });
   };
 
@@ -368,17 +1320,10 @@ const FestivalPlanner = () => {
       return { bands: bandsWithPositions, maxColumns: columns.length };
     };
 
-    const timeToMinutes = (timeStr) => {
-      const [hours, minutes] = timeStr.split(":").map(Number);
-      let adjustedHours = hours;
-      if (hours < 11) adjustedHours += 24; // Next day hours
-      return (adjustedHours - 11) * 60 + minutes;
-    };
-
     // Calculate dynamic row height based on content
     const calculateRowHeight = (maxColumns) => {
       // Base height for time labels
-      const baseHeight = 100;
+      const baseHeight = 60;
       // Add extra height if there are many columns (more text per row)
       const extraHeight = maxColumns > 3 ? 20 : 0;
       return baseHeight + extraHeight;
@@ -432,7 +1377,7 @@ const FestivalPlanner = () => {
                   {positionedBands.map((band) => {
                     const topPosition = (band.startMinutes * rowHeight) / 60;
                     const duration = band.endMinutes - band.startMinutes;
-                    const height = Math.max(70, (duration * rowHeight) / 60);
+                    const height = Math.max(50, (duration * rowHeight) / 60);
 
                     const columnWidth = maxColumns > 0 ? 100 / maxColumns : 100;
                     const leftPosition = band.column * columnWidth;
@@ -445,15 +1390,15 @@ const FestivalPlanner = () => {
                     if (band.stats.consensus === "strong_yes") {
                       consensusColor =
                         "bg-green-100 border-green-400 text-green-800";
-                      consensusIcon = "??";
+                      consensusIcon = "🔥";
                     } else if (band.stats.consensus === "mild_yes") {
                       consensusColor =
                         "bg-blue-100 border-blue-400 text-blue-800";
-                      consensusIcon = "??";
+                      consensusIcon = "👍";
                     } else if (band.stats.mustSeeCount >= minGroupSize) {
                       consensusColor =
                         "bg-yellow-100 border-yellow-400 text-yellow-800";
-                      consensusIcon = "?";
+                      consensusIcon = "⭐";
                     }
 
                     return (
@@ -477,7 +1422,7 @@ const FestivalPlanner = () => {
                             .length
                         } want to see - ${band.stats.avgRating.toFixed(
                           1
-                        )}? avg`}
+                        )}★ avg`}
                       >
                         {/* Band name - always visible */}
                         <div className="font-semibold text-sm leading-tight">
@@ -617,7 +1562,7 @@ const FestivalPlanner = () => {
                   </div>
                 </div>
                 <div className="text-sm">
-                  ?? {meeting.attendees.length} people
+                  👥 {meeting.attendees.length} people
                 </div>
               </div>
             ))}
@@ -896,6 +1841,13 @@ const FestivalPlanner = () => {
                 { key: "timeline", label: "Timeline", icon: Calendar },
                 { key: "conflicts", label: "Conflicts", icon: AlertTriangle },
                 { key: "consensus", label: "Consensus", icon: Target },
+                {
+                  key: "suggestions",
+                  label: "Smart Suggestions",
+                  icon: Lightbulb,
+                },
+                { key: "planner", label: "Day Planner", icon: Route },
+                { key: "analytics", label: "Group Analytics", icon: Brain },
               ].map((view) => {
                 const IconComponent = view.icon;
                 return (
@@ -916,19 +1868,102 @@ const FestivalPlanner = () => {
             </div>
           </div>
 
-          {/* Export Button */}
+          {/* Export Options */}
           <div className="mb-6">
-            <button
-              onClick={exportGroupSchedule}
-              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-            >
-              <Share size={18} />
-              Export Group Schedule
-            </button>
+            <div className="flex flex-wrap gap-3">
+              <button
+                onClick={exportGroupSchedule}
+                className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+              >
+                <Share size={18} />
+                Export Full Schedule
+              </button>
+
+              <button
+                onClick={() => {
+                  const budget = getBudgetEstimate();
+                  const budgetText =
+                    `💰 GRASPOP BUDGET BREAKDOWN\n\n` +
+                    `Food: €${budget.food.total}\n` +
+                    `Drinks: €${budget.drinks.total}\n` +
+                    `Merchandise: €${budget.merchandise.estimated}\n` +
+                    `Transport: €${budget.transport.total}\n\n` +
+                    `TOTAL: €${budget.grandTotal}\n` +
+                    `Per person: €${Math.round(
+                      budget.grandTotal /
+                        users.filter((u) => selectedUsers.includes(u.id)).length
+                    )}`;
+                  navigator.clipboard.writeText(budgetText);
+                  alert("Budget breakdown copied!");
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+              >
+                <DollarSign size={18} />
+                Export Budget
+              </button>
+
+              <button
+                onClick={() => {
+                  const conflicts = getTimeConflicts();
+                  if (Object.keys(conflicts).length === 0) {
+                    alert("No conflicts to export - great planning!");
+                    return;
+                  }
+
+                  let conflictText = `⚠️ GRASPOP SCHEDULE CONFLICTS\n\n`;
+                  Object.values(conflicts).forEach((conflict) => {
+                    conflictText += `${conflict.day} at ${conflict.time}:\n`;
+                    conflict.conflicts.forEach((userConflict) => {
+                      conflictText += `• ${
+                        userConflict.user.name
+                      }: ${userConflict.bands
+                        .map((b) => `${b.name} (${b.stage})`)
+                        .join(" vs ")}\n`;
+                    });
+                    conflictText += "\n";
+                  });
+
+                  navigator.clipboard.writeText(conflictText);
+                  alert("Conflicts list copied!");
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
+              >
+                <AlertTriangle size={18} />
+                Export Conflicts
+              </button>
+
+              <button
+                onClick={() => {
+                  const analytics = getGroupAnalytics();
+                  let analyticsText = `📊 GRASPOP GROUP ANALYTICS\n\n`;
+                  analyticsText += `Group Stats:\n`;
+                  analyticsText += `• Total ratings: ${analytics.groupStats.totalRated}\n`;
+                  analyticsText += `• Average rating: ${analytics.groupStats.avgGroupRating}\n\n`;
+
+                  if (analytics.userSimilarity.length > 0) {
+                    analyticsText += `Music Compatibility:\n`;
+                    analytics.userSimilarity.slice(0, 3).forEach((pair) => {
+                      analyticsText += `• ${pair.users[0]} & ${
+                        pair.users[1]
+                      }: ${Math.round(pair.similarity * 100)}% compatible\n`;
+                    });
+                  }
+
+                  navigator.clipboard.writeText(analyticsText);
+                  alert("Analytics summary copied!");
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <Brain size={18} />
+                Export Analytics
+              </button>
+            </div>
           </div>
 
-          {/* Settings for consensus views */}
-          {(viewMode === "consensus" || viewMode === "conflicts") && (
+          {/* Settings for various views */}
+          {(viewMode === "consensus" ||
+            viewMode === "conflicts" ||
+            viewMode === "suggestions") && (
             <div className="mb-6 p-4 bg-gray-50 rounded-lg">
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Minimum group size for consensus: {minGroupSize}
@@ -941,6 +1976,24 @@ const FestivalPlanner = () => {
                 onChange={(e) => setMinGroupSize(parseInt(e.target.value))}
                 className="w-full"
               />
+            </div>
+          )}
+
+          {viewMode === "planner" && (
+            <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+              <div className="flex items-center space-x-4">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={energyManagement}
+                    onChange={(e) => setEnergyManagement(e.target.checked)}
+                    className="mr-2"
+                  />
+                  <span className="text-sm">
+                    Enable energy management warnings
+                  </span>
+                </label>
+              </div>
             </div>
           )}
 
@@ -986,6 +2039,9 @@ const FestivalPlanner = () => {
         {viewMode === "timeline" && <TimelineView />}
         {viewMode === "conflicts" && <ConflictsView />}
         {viewMode === "consensus" && <ConsensusView />}
+        {viewMode === "suggestions" && <SuggestionsView />}
+        {viewMode === "planner" && <PlannerView />}
+        {viewMode === "analytics" && <AnalyticsView />}
 
         {/* Band List View */}
         {viewMode === "list" && (
